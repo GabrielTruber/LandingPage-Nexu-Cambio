@@ -6,31 +6,31 @@
 <title>Nexo Câmbio Editorial</title>
 <style>
   :root{
-    --bg:#FBFAF7;
+    --bg:#FAFAFA;
     --panel:#FFFFFF;
-    --ink:#1C1B18;
-    --ink-soft:#716C61;
-    --accent:#8A6A3B;
-    --line:#E4E0D6;
+    --ink:#0D1B2A;
+    --ink-soft:#414B5F;
+    --accent:#A97C2E;
+    --line:#E3E6EE;
     color-scheme:light;
   }
   :root[data-theme="dark"]{
-    --bg:#16140F;
-    --panel:#1E1B15;
-    --ink:#F2EEE4;
-    --ink-soft:#B3AA98;
-    --accent:#D3A35B;
-    --line:#332E24;
+    --bg:#081226;
+    --panel:#101B36;
+    --ink:#EDF1FA;
+    --ink-soft:#9AA7C2;
+    --accent:#D9B36B;
+    --line:#1E2C4A;
     color-scheme:dark;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#16140F;
-      --panel:#1E1B15;
-      --ink:#F2EEE4;
-      --ink-soft:#B3AA98;
-      --accent:#D3A35B;
-      --line:#332E24;
+      --bg:#081226;
+      --panel:#101B36;
+      --ink:#EDF1FA;
+      --ink-soft:#9AA7C2;
+      --accent:#D9B36B;
+      --line:#1E2C4A;
       color-scheme:dark;
     }
   }
@@ -52,8 +52,7 @@
 
   header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb, var(--bg) 90%, transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:22px;}
-  .brand{font-size:1.15rem;letter-spacing:.01em;}
-  .brand em{font-style:italic;color:var(--accent);}
+  .brand img{height:30px;width:auto;display:block;}
   nav ul{list-style:none;display:flex;gap:32px;margin:0;padding:0;font-family:'Instrument Sans',sans-serif;font-size:.85rem;letter-spacing:.02em;}
   nav ul li a{text-decoration:none;color:var(--ink-soft);border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s,color .2s;}
   nav ul li a:hover{color:var(--ink);border-color:var(--accent);}
@@ -116,12 +115,12 @@
 </style>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500;600&display=swap">
+
 </head>
 <body>
-
 <header class="nav">
   <div class="wrap nav-inner">
-    <div class="brand">Nexo <em>Câmbio</em></div>
+    <div class="brand"><img src="../assets/logo-nexo-cambio.png" alt="Nexo Câmbio"></div>
     <nav><ul>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#servicos">Serviços</a></li>
@@ -232,5 +231,6 @@
   els.forEach(function(e){ io.observe(e); });
 })();
 </script>
+
 </body>
 </html>

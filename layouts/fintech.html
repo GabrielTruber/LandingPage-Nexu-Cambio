@@ -6,43 +6,43 @@
 <title>Nexo Câmbio Fintech</title>
 <style>
   :root{
-    --bg:#0E1210;
-    --panel:#161B18;
-    --panel-2:#1D2420;
+    --bg:#081226;
+    --panel:#101B36;
+    --panel-2:#16234A;
     --ink:#EDF2EE;
     --ink-soft:#9BA8A0;
-    --accent:#FF7A45;
-    --accent-soft:#3A2A1E;
-    --line:#2A322D;
+    --accent:#C9A24A;
+    --accent-soft:#3A2F14;
+    --line:#1E2C4A;
     color-scheme:dark;
   }
   :root[data-theme="light"]{
-    --bg:#F3F1EA;
+    --bg:#FAFAFA;
     --panel:#FFFFFF;
-    --panel-2:#EDEAE0;
-    --ink:#171A17;
-    --ink-soft:#5B645C;
-    --accent:#D85A28;
-    --accent-soft:#F4DCC9;
-    --line:#DDD8C9;
+    --panel-2:#F1F3FA;
+    --ink:#0D1B2A;
+    --ink-soft:#414B5F;
+    --accent:#A97C2E;
+    --accent-soft:#F1E4CA;
+    --line:#E3E6EE;
     color-scheme:light;
   }
   @media (prefers-color-scheme: light){
     :root:not([data-theme="dark"]){
-      --bg:#F3F1EA;
+      --bg:#FAFAFA;
       --panel:#FFFFFF;
-      --panel-2:#EDEAE0;
-      --ink:#171A17;
-      --ink-soft:#5B645C;
-      --accent:#D85A28;
-      --accent-soft:#F4DCC9;
-      --line:#DDD8C9;
+      --panel-2:#F1F3FA;
+      --ink:#0D1B2A;
+      --ink-soft:#414B5F;
+      --accent:#A97C2E;
+      --accent-soft:#F1E4CA;
+      --line:#E3E6EE;
       color-scheme:light;
     }
   }
   *{box-sizing:border-box;}
-  body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
-  h1,h2,h3{font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-0.02em;text-wrap:balance;margin:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:800;letter-spacing:-0.02em;text-wrap:balance;margin:0;}
   .mono{font-family:'JetBrains Mono', ui-monospace, monospace;}
   a{color:inherit;}
   .wrap{max-width:1160px;margin:0 auto;padding-inline:24px;}
@@ -57,14 +57,15 @@
 
   header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb, var(--bg) 82%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:16px;}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem;}
-  .brand .dot{width:10px;height:10px;border-radius:2px;background:var(--accent);}
+  .brand{display:flex;align-items:center;}
+  .brand .plate{background:#FFFFFF;border:1px solid var(--line);border-radius:8px;padding:5px 10px;display:flex;align-items:center;}
+  .brand img{height:24px;width:auto;display:block;}
   nav ul{list-style:none;display:flex;gap:30px;margin:0;padding:0;font-size:.9rem;}
   nav ul li a{text-decoration:none;color:var(--ink-soft);transition:color .2s;}
   nav ul li a:hover{color:var(--ink);}
   @media (max-width:760px){ nav ul{display:none;} }
   .btn{font-weight:700;font-size:.88rem;padding:13px 24px;border-radius:999px;text-decoration:none;display:inline-block;transition:transform .2s,box-shadow .2s;}
-  .btn-primary{background:var(--accent);color:#0E1210;}
+  .btn-primary{background:var(--accent);color:#081226;}
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px var(--accent);}
   .btn-ghost{border:1px solid var(--line);color:var(--ink);}
   .btn-ghost:hover{border-color:var(--accent);}
@@ -140,13 +141,13 @@
   .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:.84rem;color:var(--ink-soft);}
 </style>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
 </head>
 <body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <div class="brand"><span class="dot"></span>Nexo Câmbio</div>
+    <div class="brand"><span class="plate"><img src="../assets/logo-nexo-cambio.png" alt="Nexo Câmbio"></span></div>
     <nav><ul>
       <li><a href="#produto">Produto</a></li>
       <li><a href="#como-funciona">Como funciona</a></li>
@@ -274,5 +275,6 @@
   els.forEach(function(e){ io.observe(e); });
 })();
 </script>
+
 </body>
 </html>

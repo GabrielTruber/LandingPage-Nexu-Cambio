@@ -6,41 +6,41 @@
 <title>Nexo Câmbio Institucional</title>
 <style>
   :root{
-    --bg:#F6F2E9;
+    --bg:#FAFAFA;
     --bg-panel:#FFFFFF;
     --ink:#132A3E;
     --ink-soft:#4A5A68;
-    --navy:#0B2545;
-    --navy-deep:#081B33;
-    --gold:#B8912F;
-    --gold-soft:#E4D3A0;
-    --line:#D8CFBA;
+    --navy:#081F61;
+    --navy-deep:#050F35;
+    --gold:#C4942D;
+    --gold-soft:#E2C078;
+    --line:#E3E6EE;
     color-scheme:light;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#0C1B2A;
-      --bg-panel:#122436;
-      --ink:#EDE7D8;
-      --ink-soft:#AFC0CC;
-      --navy:#0B2545;
+      --bg:#050F1F;
+      --bg-panel:#0C1830;
+      --ink:#EDF1FA;
+      --ink-soft:#9AA7C2;
+      --navy:#081F61;
       --navy-deep:#061426;
-      --gold:#D8B45B;
-      --gold-soft:#8A7442;
-      --line:#233C50;
+      --gold:#D9B36B;
+      --gold-soft:#8A6B2E;
+      --line:#1E2C4A;
       color-scheme:dark;
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0C1B2A;
-    --bg-panel:#122436;
-    --ink:#EDE7D8;
-    --ink-soft:#AFC0CC;
-    --navy:#0B2545;
+    --bg:#050F1F;
+    --bg-panel:#0C1830;
+    --ink:#EDF1FA;
+    --ink-soft:#9AA7C2;
+    --navy:#081F61;
     --navy-deep:#061426;
-    --gold:#D8B45B;
-    --gold-soft:#8A7442;
-    --line:#233C50;
+    --gold:#D9B36B;
+    --gold-soft:#8A6B2E;
+    --line:#1E2C4A;
     color-scheme:dark;
   }
 
@@ -48,13 +48,13 @@
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:'Source Serif 4', Georgia, 'Times New Roman', serif;
+    font-family:'Inter', system-ui, sans-serif;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3,.display{
-    font-family:'Fraunces', 'Source Serif 4', Georgia, serif;
-    font-weight:600;
+    font-family:'Poppins', 'Inter', system-ui, sans-serif;
+    font-weight:700;
     letter-spacing:-0.01em;
     text-wrap:balance;
     margin:0;
@@ -81,11 +81,8 @@
     border-bottom:1px solid var(--line);
   }
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:18px;}
-  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;}
-  .brand .mark{width:30px;height:30px;border-radius:50%;background:var(--navy);display:grid;place-items:center;flex:none;}
-  :root[data-theme="dark"] .brand .mark,
-  @media (prefers-color-scheme: dark){ .brand .mark{background:var(--gold);} }
-  .brand .mark svg{width:15px;height:15px;stroke:var(--gold);}
+  .brand{display:flex;align-items:center;gap:0;}
+  .brand img{height:34px;width:auto;display:block;}
   nav ul{list-style:none;display:flex;gap:28px;margin:0;padding:0;font-family:'Inter',sans-serif;font-size:.92rem;}
   nav ul li a{text-decoration:none;color:var(--ink-soft);transition:color .2s;}
   nav ul li a:hover{color:var(--gold);}
@@ -107,7 +104,7 @@
     font-family:'Inter',sans-serif;font-size:.92rem;font-weight:600;padding:14px 26px;
     border-radius:2px;text-decoration:none;display:inline-block;transition:transform .2s, background .2s;
   }
-  .btn-primary{background:var(--navy);color:#F6F2E9;}
+  .btn-primary{background:var(--navy);color:#FAFAFA;}
   :root[data-theme="dark"] .btn-primary,
   @media (prefers-color-scheme: dark){ .btn-primary{background:var(--gold);color:var(--navy-deep);} }
   .btn-primary:hover{transform:translateY(-2px);}
@@ -115,7 +112,7 @@
   .btn-ghost:hover{border-color:var(--gold);}
 
   .rate-card{
-    background:var(--navy);color:#EDE7D8;border-radius:4px;padding:32px;
+    background:var(--navy);color:#EDF1FA;border-radius:4px;padding:32px;
     border:1px solid var(--gold-soft);
   }
   .rate-card .label{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
@@ -129,10 +126,10 @@
   .rate-foot{font-family:'Inter',sans-serif;font-size:.72rem;color:#B9C3CC;margin-top:16px;}
 
   /* stats strip */
-  .stats{background:var(--navy);color:#EDE7D8;padding-block:56px;}
+  .stats{background:var(--navy);color:#EDF1FA;padding-block:56px;}
   .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
   @media (max-width:720px){ .stats-grid{grid-template-columns:repeat(2,1fr);} }
-  .stat-num{font-family:'Fraunces',serif;font-size:2.2rem;color:var(--gold);}
+  .stat-num{font-family:'Poppins',sans-serif;font-weight:700;font-size:2.2rem;color:var(--gold);}
   .stat-label{font-family:'Inter',sans-serif;font-size:.82rem;color:#C9D1D8;margin-top:6px;}
 
   /* section heading */
@@ -153,7 +150,7 @@
   @media (max-width:860px){ .process{grid-template-columns:1fr 1fr;} }
   @media (max-width:480px){ .process{grid-template-columns:1fr;} }
   .step{border-top:2px solid var(--gold);padding-top:18px;}
-  .step .num{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--gold-soft);}
+  .step .num{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.6rem;color:var(--gold-soft);}
   .step h4{margin-top:8px;font-size:1.05rem;}
   .step p{font-family:'Inter',sans-serif;font-size:.88rem;color:var(--ink-soft);margin-top:8px;}
 
@@ -166,21 +163,21 @@
   .testi .who strong{color:var(--ink);}
 
   /* cta band */
-  .cta-band{background:var(--navy);color:#EDE7D8;padding-block:80px;text-align:center;}
-  .cta-band h2{color:#F6F2E9;font-size:clamp(1.8rem,3.4vw,2.6rem);}
+  .cta-band{background:var(--navy);color:#EDF1FA;padding-block:80px;text-align:center;}
+  .cta-band h2{color:#FAFAFA;font-size:clamp(1.8rem,3.4vw,2.6rem);}
   .cta-band p{font-family:'Inter',sans-serif;color:#C9D1D8;max-width:52ch;margin:18px auto 0;}
 
   footer{padding-block:48px;border-top:1px solid var(--line);}
   .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;font-family:'Inter',sans-serif;font-size:.85rem;color:var(--ink-soft);}
 </style>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Inter:wght@400;500;600;700&display=swap">
-</head>
-<body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Nexo Câmbio</div>
+</head>
+<body>
+    <div class="brand"><img src="../assets/logo-nexo-cambio.png" alt="Nexo Câmbio"></div>
     <nav><ul>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#servicos">Serviços</a></li>
@@ -316,5 +313,6 @@
   els.forEach(function(e){ io.observe(e); });
 })();
 </script>
+
 </body>
 </html>
