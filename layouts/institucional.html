@@ -138,29 +138,38 @@
   .sec-head p{font-family:'Inter',sans-serif;color:var(--ink-soft);margin-top:14px;}
 
   /* services */
-  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  @media (max-width:860px){ .services-grid{grid-template-columns:1fr;} }
-  .service{background:var(--bg-panel);padding:34px 30px;}
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media (max-width:900px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .services-grid{grid-template-columns:1fr;} }
+  .service{background:var(--bg-panel);padding:30px 26px;}
   .service .num{font-family:'Inter',sans-serif;font-size:.8rem;color:var(--gold);font-weight:700;}
-  .service h3{margin-top:14px;font-size:1.25rem;}
-  .service p{font-family:'Inter',sans-serif;color:var(--ink-soft);font-size:.94rem;margin-top:10px;}
+  .service h3{margin-top:14px;font-size:1.1rem;}
+  .service p{font-family:'Inter',sans-serif;color:var(--ink-soft);font-size:.9rem;margin-top:10px;}
 
-  /* process */
-  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
-  @media (max-width:860px){ .process{grid-template-columns:1fr 1fr;} }
-  @media (max-width:480px){ .process{grid-template-columns:1fr;} }
-  .step{border-top:2px solid var(--gold);padding-top:18px;}
-  .step .num{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.6rem;color:var(--gold-soft);}
-  .step h4{margin-top:8px;font-size:1.05rem;}
-  .step p{font-family:'Inter',sans-serif;font-size:.88rem;color:var(--ink-soft);margin-top:8px;}
+  /* live ticker */
+  .ticker-bar{background:var(--navy);border-block:1px solid var(--line);overflow:hidden;}
+  .ticker-track{display:flex;width:max-content;animation:ticker-scroll 26s linear infinite;}
+  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
+  .ticker-item{display:flex;align-items:center;gap:10px;padding:14px 36px;font-family:'Inter',sans-serif;font-size:.92rem;color:#EDF1FA;white-space:nowrap;border-right:1px solid rgba(237,241,250,.15);}
+  .ticker-item .pair{color:var(--gold);font-weight:700;}
+  .ticker-item .val{font-variant-numeric:tabular-nums;font-weight:600;}
+  .ticker-item .live-dot{width:6px;height:6px;border-radius:50%;background:#7FBF8E;flex:none;}
+  @keyframes ticker-scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
-  /* testimonials */
-  .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
-  @media (max-width:720px){ .testi-grid{grid-template-columns:1fr;} }
-  .testi{background:var(--bg-panel);border:1px solid var(--line);padding:30px;border-left:3px solid var(--gold);}
-  .testi p{font-size:1.05rem;}
-  .testi .who{font-family:'Inter',sans-serif;font-size:.85rem;color:var(--ink-soft);margin-top:16px;}
-  .testi .who strong{color:var(--ink);}
+  /* partners placeholder */
+  .partners-note{border:1px dashed var(--line);border-radius:6px;padding:28px;text-align:center;color:var(--ink-soft);font-family:'Inter',sans-serif;font-size:.92rem;}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media (max-width:720px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-card{background:var(--bg-panel);border:1px solid var(--line);padding:28px;}
+  .contact-card .role{font-family:'Inter',sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
+  .contact-card h3{margin-top:10px;font-size:1.2rem;}
+  .contact-card .meta{font-family:'Inter',sans-serif;color:var(--ink-soft);font-size:.9rem;margin-top:6px;}
+  .wa-btn{margin-top:18px;display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#06210F;font-family:'Inter',sans-serif;font-weight:600;font-size:.88rem;padding:10px 18px;border-radius:999px;text-decoration:none;}
+  .wa-btn svg{width:16px;height:16px;fill:#06210F;}
+  .wa-float{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));width:54px;height:54px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 8px 20px -6px rgba(0,0,0,.4);z-index:20;text-decoration:none;}
+  .wa-float svg{width:26px;height:26px;fill:#06210F;}
 
   /* cta band */
   .cta-band{background:var(--navy);color:#EDF1FA;padding-block:80px;text-align:center;}
@@ -172,53 +181,60 @@
 </style>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+</head>
+<body>
 
 <header class="nav">
   <div class="wrap nav-inner">
-</head>
-<body>
     <div class="brand"><img src="../assets/logo-nexo-cambio.png" alt="Nexo Câmbio"></div>
     <nav><ul>
-      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#sobre">Quem somos</a></li>
       <li><a href="#servicos">Serviços</a></li>
-      <li><a href="#processo">Processo</a></li>
-      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#cambio">Câmbio ao vivo</a></li>
+      <li><a href="#parceiros">Parceiros</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul></nav>
-    <a href="#contato" class="btn btn-primary sans" style="padding:10px 20px;font-size:.85rem;">Falar com especialista</a>
+    <a href="#contato" class="btn btn-primary sans" style="padding:10px 20px;font-size:.85rem;">Falar no WhatsApp</a>
   </div>
 </header>
+
+<div class="ticker-bar" id="cambio">
+  <div class="ticker-track" id="ticker-track">
+    <span class="ticker-item"><span class="live-dot"></span><span class="pair">USD/BRL</span><span class="val" data-usd-brl>carregando…</span></span>
+    <span class="ticker-item"><span class="live-dot"></span><span class="pair">EUR/BRL</span><span class="val" data-eur-brl>carregando…</span></span>
+    <span class="ticker-item"><span class="live-dot"></span><span class="pair">USD/BRL</span><span class="val" data-usd-brl>carregando…</span></span>
+    <span class="ticker-item"><span class="live-dot"></span><span class="pair">EUR/BRL</span><span class="val" data-eur-brl>carregando…</span></span>
+  </div>
+</div>
 
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="reveal">
-      <div class="eyebrow">Câmbio institucional desde 2011</div>
-      <h1>Operações cambiais com a precisão que sua empresa exige.</h1>
-      <p class="lead sans">A Nexo Câmbio estrutura remessas internacionais, hedge cambial e contas multimoeda para empresas que não podem errar o timing do mercado.</p>
+      <div class="eyebrow">A fintech exclusiva do comércio exterior</div>
+      <h1>Conectando empresas ao mercado financeiro global.</h1>
+      <p class="lead sans">Reunimos soluções para tornar as operações de câmbio mais simples, eficientes e competitivas — do cadastro à liquidação.</p>
       <div class="cta-row">
-        <a href="#contato" class="btn btn-primary sans">Solicitar cotação</a>
+        <a href="#contato" class="btn btn-primary sans">Falar no WhatsApp</a>
         <a href="#servicos" class="btn btn-ghost sans">Ver serviços</a>
       </div>
     </div>
     <div class="reveal rate-card">
-      <div class="label">Cotações de referência</div>
+      <div class="label">Cotação em tempo real</div>
       <div class="rate-list">
-        <div class="rate-row"><span class="rate-pair">USD / BRL</span><span><span class="rate-val">5,38</span><span class="rate-delta up">▲ 0,4%</span></span></div>
-        <div class="rate-row"><span class="rate-pair">EUR / BRL</span><span><span class="rate-val">5,82</span><span class="rate-delta down">▼ 0,2%</span></span></div>
-        <div class="rate-row"><span class="rate-pair">GBP / BRL</span><span><span class="rate-val">6,79</span><span class="rate-delta up">▲ 0,1%</span></span></div>
-        <div class="rate-row"><span class="rate-pair">USD / EUR</span><span><span class="rate-val">0,92</span><span class="rate-delta down">▼ 0,1%</span></span></div>
+        <div class="rate-row"><span class="rate-pair">USD / BRL</span><span class="rate-val" data-usd-brl>carregando…</span></div>
+        <div class="rate-row"><span class="rate-pair">EUR / BRL</span><span class="rate-val" data-eur-brl>carregando…</span></div>
       </div>
-      <div class="rate-foot">Indicativo, sujeito a spread operacional • atualizado a cada pregão</div>
+      <div class="rate-foot">Fonte: Frankfurter (BCE) · atualizado <span data-rate-date>agora</span></div>
     </div>
   </div>
 </section>
 
 <div class="stats reveal">
   <div class="wrap stats-grid">
-    <div><div class="stat-num">R$ 2,4 bi</div><div class="stat-label">volume intermediado em 2025</div></div>
-    <div><div class="stat-num">340+</div><div class="stat-label">empresas atendidas</div></div>
-    <div><div class="stat-num">18</div><div class="stat-label">moedas operadas</div></div>
-    <div><div class="stat-num">98,7%</div><div class="stat-label">liquidações no prazo</div></div>
+    <div><div class="stat-num">R$ 449 MM</div><div class="stat-label">movimentados pela mesa de câmbio em 12 meses</div></div>
+    <div><div class="stat-num">R$ 410,6 MM</div><div class="stat-label">em câmbio pronto</div></div>
+    <div><div class="stat-num">R$ 38,4 MM</div><div class="stat-label">em stablecoin</div></div>
+    <div><div class="stat-num">3.748</div><div class="stat-label">operações no período</div></div>
   </div>
 </div>
 
@@ -226,8 +242,9 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Quem somos</div>
-      <h2>Uma mesa de câmbio dedicada a decisões, não apenas a transações.</h2>
-      <p class="sans">Somos uma corretora de câmbio autorizada, especializada em operações institucionais. Combinamos analistas de mercado, tecnologia proprietária de monitoramento e um atendimento consultivo para que cada remessa, cada hedge, cada conversão aconteça no momento certo — e não apenas no momento possível.</p>
+      <h2>Seu câmbio, mais conectado.</h2>
+      <p class="sans">A NEXO conecta empresas ao mercado financeiro global, reunindo soluções para tornar as operações de câmbio mais simples, eficientes e competitivas. Nossa atuação com diferentes parceiros e o volume de operações negociadas nos permitem buscar condições diferenciadas de mercado, adequadas ao perfil e à necessidade de cada cliente.</p>
+      <p class="sans" style="margin-top:14px;font-weight:600;color:var(--ink);">Mais opções. Mais poder de negociação. Melhores condições para o seu câmbio.</p>
     </div>
   </div>
 </section>
@@ -236,68 +253,65 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">O que fazemos</div>
-      <h2>Serviços cambiais de ponta a ponta</h2>
+      <h2>Soluções completas em câmbio</h2>
+      <p class="sans">Simples, ágil, vantajoso.</p>
     </div>
     <div class="services-grid reveal">
-      <div class="service"><div class="num">01</div><h3>Remessas internacionais</h3><p>Pagamentos a fornecedores, importação e exportação com liquidação em D+1 nas principais praças.</p></div>
-      <div class="service"><div class="num">02</div><h3>Hedge cambial</h3><p>Contratos a termo e NDF para travar taxa e proteger margem contra volatilidade.</p></div>
-      <div class="service"><div class="num">03</div><h3>Conta multimoeda</h3><p>Mantenha saldo em USD, EUR e GBP e escolha o melhor momento para converter.</p></div>
-      <div class="service"><div class="num">04</div><h3>Câmbio turismo corporativo</h3><p>Viagens de negócios e delegações com entrega programada e cartão pré-pago.</p></div>
-      <div class="service"><div class="num">05</div><h3>Consultoria de risco</h3><p>Relatórios semanais de cenário macro e recomendação de posição para o seu fluxo de caixa.</p></div>
-      <div class="service"><div class="num">06</div><h3>Compliance cambial</h3><p>Estruturação documental para operações no Banco Central e suporte em fiscalização.</p></div>
+      <div class="service"><div class="num">01</div><h3>Comercial</h3><p>Negociando spreads competitivos e condições exclusivas.</p></div>
+      <div class="service"><div class="num">02</div><h3>Análise cambial</h3><p>Análise e controle de documentos cambiais.</p></div>
+      <div class="service"><div class="num">03</div><h3>Mesa de câmbio personalizada</h3><p>Operadores especializados em câmbio.</p></div>
+      <div class="service"><div class="num">04</div><h3>Agilidade cadastral</h3><p>Cadastro desburocratizado e rápido.</p></div>
+      <div class="service"><div class="num">05</div><h3>Importação e exportação</h3><p>Pagamento à vista, antecipado, a prazo ou com câmbio futuro. Fechamento em até dois dias úteis.</p></div>
+      <div class="service"><div class="num">06</div><h3>Suporte especializado em Comex</h3><p>Equipe certificada (ABT 1 &amp; ABT 2) para compliance, ROF, RDE-IED e otimização tributária.</p></div>
+      <div class="service"><div class="num">07</div><h3>Remessas internacionais</h3><p>Envio e recebimento em Dólar, Euro, Libra, Yuan e outras moedas — imóveis, plataformas digitais, stablecoins e investimentos no exterior.</p></div>
     </div>
   </div>
 </section>
 
-<section id="processo">
+<section id="parceiros">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">Como funciona</div>
-      <h2>Do cadastro à liquidação, em quatro etapas</h2>
+      <div class="eyebrow">Parceiros</div>
+      <h2>Bancos e instituições parceiras</h2>
+      <p class="sans">Operamos com acesso a múltiplas instituições financeiras para buscar as melhores condições em cada operação.</p>
     </div>
-    <div class="process reveal">
-      <div class="step"><div class="num">01</div><h4>Cadastro e KYC</h4><p class="sans">Onboarding digital com análise de compliance em até 24h.</p></div>
-      <div class="step"><div class="num">02</div><h4>Cotação dedicada</h4><p class="sans">Mesa de operações apresenta taxa e janela de execução.</p></div>
-      <div class="step"><div class="num">03</div><h4>Execução</h4><p class="sans">Fechamento do contrato de câmbio com confirmação formal.</p></div>
-      <div class="step"><div class="num">04</div><h4>Liquidação</h4><p class="sans">Transferência e comprovante de fechamento em até D+1.</p></div>
-    </div>
+    <div class="partners-note reveal">Lista de bancos e instituições parceiras em atualização.</div>
   </div>
 </section>
 
-<section id="clientes">
+<section id="contato">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">Confiança</div>
-      <h2>O que dizem nossos clientes</h2>
+      <div class="eyebrow">Fale com a gente</div>
+      <h2>Alguma dúvida?</h2>
+      <p class="sans">Converse com nosso time comercial e compare condições sem compromisso.</p>
     </div>
-    <div class="testi-grid reveal">
-      <div class="testi">
-        <p>"Reduzimos em 30% a exposição cambial da nossa importação depois que passamos a operar com hedge estruturado pela Nexo."</p>
-        <div class="who"><strong>Marina Kael</strong> — CFO, Altiva Indústria</div>
+    <div class="contact-grid reveal">
+      <div class="contact-card">
+        <div class="role">Comercial</div>
+        <h3>Leonardo Penafort</h3>
+        <div class="meta">9 9963 1711</div>
+        <div class="meta">leonardo@nexocambio.com.br</div>
+        <a class="wa-btn" href="https://wa.me/5599631711" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.8c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/></svg>WhatsApp</a>
       </div>
-      <div class="testi">
-        <p>"Atendimento consultivo de verdade. A mesa nos avisa antes de perguntarmos, e isso já evitou prejuízo em dois momentos de volatilidade."</p>
-        <div class="who"><strong>Rodrigo Passos</strong> — Diretor Financeiro, Vetta Import</div>
+      <div class="contact-card">
+        <div class="role">Comercial · PR</div>
+        <h3>Fládio Mendes</h3>
+        <div class="meta">(41) 9 8729 7007</div>
+        <div class="meta">fladiomendes@nexocambio.com.br</div>
+        <a class="wa-btn" href="https://wa.me/5541987297007" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.8c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/></svg>WhatsApp</a>
       </div>
     </div>
   </div>
 </section>
 
-<div class="cta-band reveal">
-  <div class="wrap">
-    <h2>Pronto para uma operação sem sobressaltos?</h2>
-    <p>Fale hoje com nossa mesa e receba uma cotação personalizada para o seu volume.</p>
-    <div class="cta-row" style="justify-content:center;margin-top:30px;">
-      <a href="#contato" class="btn btn-primary sans" style="background:var(--gold);color:var(--navy-deep);">Solicitar cotação</a>
-    </div>
-  </div>
-</div>
+<a class="wa-float" href="#contato" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.8c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/></svg></a>
 
-<footer id="contato">
+<footer>
   <div class="wrap foot-grid">
-    <div>© 2026 Nexo Câmbio · Corretora autorizada</div>
-    <div>contato@nexocambio.com.br</div>
-    <div>São Paulo — Rio de Janeiro — Curitiba</div>
+    <div>© 2026 Nexo Câmbio</div>
+    <div>nexocambio.com.br</div>
+    <div>leonardo@nexocambio.com.br · fladiomendes@nexocambio.com.br</div>
   </div>
 </footer>
 
@@ -311,6 +325,26 @@
     });
   }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
   els.forEach(function(e){ io.observe(e); });
+})();
+
+(function(){
+  function fmt(n){ return n.toLocaleString('pt-BR',{minimumFractionDigits:4,maximumFractionDigits:4}); }
+  async function updateRates(){
+    try{
+      var res = await fetch('https://api.frankfurter.app/latest?from=USD&to=BRL,EUR');
+      if(!res.ok) throw new Error('bad response');
+      var data = await res.json();
+      var usdBrl = data.rates.BRL;
+      var eurBrl = data.rates.BRL / data.rates.EUR;
+      document.querySelectorAll('[data-usd-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(usdBrl); });
+      document.querySelectorAll('[data-eur-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(eurBrl); });
+      document.querySelectorAll('[data-rate-date]').forEach(function(el){ el.textContent = data.date; });
+    }catch(e){
+      document.querySelectorAll('[data-usd-brl],[data-eur-brl]').forEach(function(el){ if(el.textContent==='carregando…') el.textContent = 'indisponível'; });
+    }
+  }
+  updateRates();
+  setInterval(updateRates, 5*60*1000);
 })();
 </script>
 

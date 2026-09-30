@@ -126,12 +126,27 @@
   .stat-num{font-size:2.3rem;font-weight:800;color:var(--accent);}
   .stat-label{font-size:.85rem;color:var(--ink-soft);margin-top:4px;}
 
-  .testi-scroll{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  @media (max-width:900px){ .testi-scroll{grid-template-columns:1fr;} }
-  .testi{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;}
-  .testi .stars{color:var(--accent);font-size:.9rem;letter-spacing:2px;}
-  .testi p{margin-top:14px;font-size:.96rem;}
-  .testi .who{margin-top:18px;font-size:.84rem;color:var(--ink-soft);}
+  .marquee-bar{background:var(--panel-2);border-block:1px solid var(--line);overflow:hidden;}
+  .marquee-track{display:flex;width:max-content;animation:marquee-scroll 24s linear infinite;}
+  @media (prefers-reduced-motion: reduce){ .marquee-track{animation:none;} }
+  .marquee-item{display:flex;align-items:center;gap:10px;padding:14px 36px;font-size:.92rem;white-space:nowrap;border-right:1px solid var(--line);}
+  .marquee-item .pair{color:var(--accent);font-weight:700;}
+  .marquee-item .val{font-variant-numeric:tabular-nums;font-weight:700;font-family:'JetBrains Mono',monospace;}
+  .marquee-item .live-dot{width:6px;height:6px;border-radius:50%;background:#5FD38A;flex:none;}
+  @keyframes marquee-scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  .partners-note{border:1px dashed var(--line);border-radius:16px;padding:28px;text-align:center;color:var(--ink-soft);font-size:.92rem;}
+
+  .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media (max-width:720px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;}
+  .contact-card .role{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  .contact-card h3{margin-top:10px;font-size:1.15rem;}
+  .contact-card .meta{color:var(--ink-soft);font-size:.9rem;margin-top:6px;}
+  .wa-btn{margin-top:18px;display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#06210F;font-weight:700;font-size:.88rem;padding:10px 18px;border-radius:999px;text-decoration:none;}
+  .wa-btn svg{width:16px;height:16px;fill:#06210F;}
+  .wa-float{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));width:54px;height:54px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 8px 20px -6px rgba(0,0,0,.5);z-index:20;text-decoration:none;}
+  .wa-float svg{width:26px;height:26px;fill:#06210F;}
 
   .cta-final{border-radius:28px;background:linear-gradient(135deg, var(--panel), var(--panel-2));border:1px solid var(--line);padding:64px 40px;text-align:center;position:relative;overflow:hidden;}
   .cta-final h2{font-size:clamp(1.9rem,3.8vw,2.8rem);}
@@ -141,125 +156,133 @@
   .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:.84rem;color:var(--ink-soft);}
 </style>
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
 </head>
 <body>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
 
 <header class="nav">
   <div class="wrap nav-inner">
     <div class="brand"><span class="plate"><img src="../assets/logo-nexo-cambio.png" alt="Nexo Câmbio"></span></div>
     <nav><ul>
-      <li><a href="#produto">Produto</a></li>
-      <li><a href="#como-funciona">Como funciona</a></li>
-      <li><a href="#numeros">Números</a></li>
-      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#sobre">Quem somos</a></li>
+      <li><a href="#produto">Serviços</a></li>
+      <li><a href="#cambio">Câmbio ao vivo</a></li>
+      <li><a href="#parceiros">Parceiros</a></li>
     </ul></nav>
-    <a href="#contato" class="btn btn-primary">Abrir conta</a>
+    <a href="#contato" class="btn btn-primary">Falar no WhatsApp</a>
   </div>
 </header>
+
+<div class="marquee-bar" id="cambio">
+  <div class="marquee-track" id="marquee-track">
+    <span class="marquee-item"><span class="live-dot"></span><span class="pair">USD/BRL</span><span class="val" data-usd-brl>carregando…</span></span>
+    <span class="marquee-item"><span class="live-dot"></span><span class="pair">EUR/BRL</span><span class="val" data-eur-brl>carregando…</span></span>
+    <span class="marquee-item"><span class="live-dot"></span><span class="pair">USD/BRL</span><span class="val" data-usd-brl>carregando…</span></span>
+    <span class="marquee-item"><span class="live-dot"></span><span class="pair">EUR/BRL</span><span class="val" data-eur-brl>carregando…</span></span>
+  </div>
+</div>
 
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="reveal">
-      <span class="badge"><span class="pulse"></span>Mesa de câmbio ao vivo</span>
-      <h1>Câmbio corporativo que <span class="hl">acompanha o ritmo</span> do seu negócio.</h1>
-      <p class="lead">Cotação em tempo real, liquidação em D+1 e uma API para automatizar remessas internacionais direto do seu ERP.</p>
+      <span class="badge"><span class="pulse"></span>Fintech exclusiva do comércio exterior</span>
+      <h1>Conectando empresas ao <span class="hl">mercado financeiro global</span>.</h1>
+      <p class="lead">Soluções para tornar as operações de câmbio mais simples, eficientes e competitivas — do cadastro à liquidação.</p>
       <div class="cta-row">
-        <a href="#contato" class="btn btn-primary">Abrir conta grátis</a>
-        <a href="#produto" class="btn btn-ghost">Ver como funciona</a>
-      </div>
-      <div class="logos" style="margin-top:56px;">
-        <span>Altiva</span><span>Vetta Import</span><span>Northgrain</span><span>Cobre Log</span><span>Ferra Tech</span>
+        <a href="#contato" class="btn btn-primary">Falar no WhatsApp</a>
+        <a href="#produto" class="btn btn-ghost">Ver serviços</a>
       </div>
     </div>
     <div class="reveal ticker">
-      <div class="ticker-head"><span>MERCADO AGORA</span><span class="mono">14:32:07</span></div>
-      <div class="ticker-row"><div class="pair"><span class="chip">$</span>USD/BRL</div><div><span class="val">5,3821</span><span class="delta up">▲0,38%</span></div></div>
-      <div class="ticker-row"><div class="pair"><span class="chip">€</span>EUR/BRL</div><div><span class="val">5,8207</span><span class="delta down">▼0,12%</span></div></div>
-      <div class="ticker-row"><div class="pair"><span class="chip">£</span>GBP/BRL</div><div><span class="val">6,7912</span><span class="delta up">▲0,09%</span></div></div>
-      <div class="ticker-row"><div class="pair"><span class="chip">¥</span>CNY/BRL</div><div><span class="val">0,7481</span><span class="delta down">▼0,04%</span></div></div>
+      <div class="ticker-head"><span>CÂMBIO AGORA</span><span class="mono" data-rate-date>—</span></div>
+      <div class="ticker-row"><div class="pair"><span class="chip">$</span>USD/BRL</div><div><span class="val" data-usd-brl>carregando…</span></div></div>
+      <div class="ticker-row"><div class="pair"><span class="chip">€</span>EUR/BRL</div><div><span class="val" data-eur-brl>carregando…</span></div></div>
     </div>
   </div>
 </section>
 
-<section id="produto" style="padding-top:0;">
+<section id="sobre" style="padding-top:0;">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="kicker">Plataforma</div>
-      <h2>Tudo que sua operação cambial precisa, num só lugar</h2>
-      <p>Da cotação à conciliação contábil, substituímos planilhas e e-mails por um fluxo único e rastreável.</p>
+      <div class="kicker">Quem somos</div>
+      <h2>Seu câmbio, mais conectado.</h2>
+      <p>A NEXO conecta empresas ao mercado financeiro global, reunindo soluções para tornar as operações de câmbio mais simples, eficientes e competitivas. Nossa atuação com diferentes parceiros e o volume de operações negociadas nos permitem buscar condições diferenciadas de mercado, adequadas ao perfil e à necessidade de cada cliente.</p>
+    </div>
+  </div>
+</section>
+
+<section id="produto">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Serviços</div>
+      <h2>Soluções completas em câmbio</h2>
+      <p>Simples, ágil, vantajoso.</p>
     </div>
     <div class="feature-grid reveal">
-      <div class="feature"><div class="icon">↗</div><h3>Cotação em tempo real</h3><p>Preços ao vivo das 18 moedas mais operadas, com alerta de variação.</p></div>
-      <div class="feature"><div class="icon">⇄</div><h3>API de remessas</h3><p>Dispare transferências internacionais direto do seu sistema financeiro.</p></div>
-      <div class="feature"><div class="icon">⛨</div><h3>Hedge automatizado</h3><p>Trava de taxa programável por volume, data ou gatilho de mercado.</p></div>
-      <div class="feature"><div class="icon">₩</div><h3>Multi-carteira</h3><p>Saldo simultâneo em USD, EUR, GBP e CNY com conversão sob demanda.</p></div>
-      <div class="feature"><div class="icon">▤</div><h3>Relatórios fiscais</h3><p>Extratos prontos para contabilidade e Banco Central, exportáveis em 1 clique.</p></div>
-      <div class="feature"><div class="icon">◎</div><h3>Aprovações em cadeia</h3><p>Fluxo de alçada configurável para operações acima de limite definido.</p></div>
+      <div class="feature"><div class="icon">◆</div><h3>Comercial</h3><p>Negociando spreads competitivos e condições exclusivas.</p></div>
+      <div class="feature"><div class="icon">▤</div><h3>Análise cambial</h3><p>Análise e controle de documentos cambiais.</p></div>
+      <div class="feature"><div class="icon">⇄</div><h3>Mesa de câmbio personalizada</h3><p>Operadores especializados em câmbio.</p></div>
+      <div class="feature"><div class="icon">⚡</div><h3>Agilidade cadastral</h3><p>Cadastro desburocratizado e rápido.</p></div>
+      <div class="feature"><div class="icon">↗</div><h3>Importação e exportação</h3><p>Pagamento à vista, antecipado, a prazo ou com câmbio futuro. Fechamento em até dois dias úteis.</p></div>
+      <div class="feature"><div class="icon">⛨</div><h3>Suporte especializado em Comex</h3><p>Equipe certificada (ABT 1 &amp; ABT 2) para compliance, ROF, RDE-IED e otimização tributária.</p></div>
+      <div class="feature"><div class="icon">◎</div><h3>Remessas internacionais</h3><p>Envio e recebimento em Dólar, Euro, Libra, Yuan e outras moedas.</p></div>
     </div>
   </div>
 </section>
 
 <div class="stat-band reveal">
   <div class="wrap stat-grid">
-    <div><div class="stat-num">2min</div><div class="stat-label">tempo médio de cotação</div></div>
-    <div><div class="stat-num">D+1</div><div class="stat-label">liquidação padrão</div></div>
-    <div><div class="stat-num">18</div><div class="stat-label">moedas suportadas</div></div>
-    <div><div class="stat-num">R$2,4bi</div><div class="stat-label">movimentados em 2025</div></div>
+    <div><div class="stat-num">R$449MM</div><div class="stat-label">movimentados em 12 meses</div></div>
+    <div><div class="stat-num">R$410,6MM</div><div class="stat-label">em câmbio pronto</div></div>
+    <div><div class="stat-num">R$38,4MM</div><div class="stat-label">em stablecoin</div></div>
+    <div><div class="stat-num">3.748</div><div class="stat-label">operações no período</div></div>
   </div>
 </div>
 
-<section id="como-funciona">
-  <div class="wrap flow">
-    <div class="reveal flow-steps">
-      <div class="kicker" style="margin-bottom:10px;">Como funciona</div>
-      <div class="flow-step"><div class="n">01</div><div><h4>Solicite a cotação</h4><p>Informe moeda, valor e prazo — a mesa retorna a taxa em minutos.</p></div></div>
-      <div class="flow-step"><div class="n">02</div><div><h4>Aprove no fluxo</h4><p>Alçadas internas aprovam direto pela plataforma ou app.</p></div></div>
-      <div class="flow-step"><div class="n">03</div><div><h4>Acompanhe em tempo real</h4><p>Status da operação atualizado do fechamento à liquidação.</p></div></div>
-      <div class="flow-step"><div class="n">04</div><div><h4>Concilie automaticamente</h4><p>Comprovantes e relatórios sincronizados com seu ERP.</p></div></div>
-    </div>
-    <div class="reveal app-mock">
-      <div class="row"><span>Remessa</span><span class="mono">#NX-88213</span></div>
-      <div class="row"><span>Destino</span><span>Shenzhen, CN</span></div>
-      <div class="row"><span>Moeda</span><span>USD → CNY</span></div>
-      <div class="amt">$ 48.200,00</div>
-      <span class="status">Liquidação em D+1</span>
-    </div>
-  </div>
-</section>
-
-<section id="clientes">
+<section id="parceiros">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="kicker">Depoimentos</div>
-      <h2>Times financeiros confiam na Nexo</h2>
+      <div class="kicker">Parceiros</div>
+      <h2>Bancos e instituições parceiras</h2>
+      <p>Operamos com acesso a múltiplas instituições financeiras para buscar as melhores condições em cada operação.</p>
     </div>
-    <div class="testi-scroll reveal">
-      <div class="testi"><div class="stars">★★★★★</div><p>"A API de remessas eliminou 6 horas por semana da nossa equipe financeira."</p><div class="who">Marina Kael — CFO, Altiva</div></div>
-      <div class="testi"><div class="stars">★★★★★</div><p>"Conseguimos travar taxa antes de uma alta de 4% no dólar. Pagou o ano todo."</p><div class="who">Rodrigo Passos — Vetta Import</div></div>
-      <div class="testi"><div class="stars">★★★★★</div><p>"Onboarding em um dia, sem burocracia de banco tradicional."</p><div class="who">Iuri Chen — Northgrain</div></div>
-    </div>
+    <div class="partners-note reveal">Lista de bancos e instituições parceiras em atualização.</div>
   </div>
 </section>
 
 <section id="contato">
   <div class="wrap">
-    <div class="reveal cta-final">
-      <h2>Comece a operar câmbio sem fricção</h2>
-      <p>Abra sua conta em minutos e receba sua primeira cotação personalizada ainda hoje.</p>
-      <div class="cta-row" style="justify-content:center;margin-top:30px;">
-        <a href="#" class="btn btn-primary">Abrir conta grátis</a>
-        <a href="#" class="btn btn-ghost">Falar com vendas</a>
+    <div class="sec-head reveal">
+      <div class="kicker">Fale com a gente</div>
+      <h2>Alguma dúvida?</h2>
+      <p>Converse com nosso time comercial e compare condições sem compromisso.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-card">
+        <div class="role">Comercial</div>
+        <h3>Leonardo Penafort</h3>
+        <div class="meta">9 9963 1711</div>
+        <div class="meta">leonardo@nexocambio.com.br</div>
+        <a class="wa-btn" href="https://wa.me/5599631711" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.8c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/></svg>WhatsApp</a>
+      </div>
+      <div class="contact-card">
+        <div class="role">Comercial · PR</div>
+        <h3>Fládio Mendes</h3>
+        <div class="meta">(41) 9 8729 7007</div>
+        <div class="meta">fladiomendes@nexocambio.com.br</div>
+        <a class="wa-btn" href="https://wa.me/5541987297007" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.8c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/></svg>WhatsApp</a>
       </div>
     </div>
   </div>
 </section>
 
+<a class="wa-float" href="#contato" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.8c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/></svg></a>
+
 <footer>
   <div class="wrap foot-grid">
     <div>© 2026 Nexo Câmbio</div>
-    <div>hello@nexocambio.com.br</div>
-    <div>Instituição de pagamento autorizada</div>
+    <div>nexocambio.com.br</div>
+    <div>leonardo@nexocambio.com.br · fladiomendes@nexocambio.com.br</div>
   </div>
 </footer>
 
@@ -273,6 +296,26 @@
     });
   }, {threshold:0.12, rootMargin:'0px 0px -60px 0px'});
   els.forEach(function(e){ io.observe(e); });
+})();
+
+(function(){
+  function fmt(n){ return n.toLocaleString('pt-BR',{minimumFractionDigits:4,maximumFractionDigits:4}); }
+  async function updateRates(){
+    try{
+      var res = await fetch('https://api.frankfurter.app/latest?from=USD&to=BRL,EUR');
+      if(!res.ok) throw new Error('bad response');
+      var data = await res.json();
+      var usdBrl = data.rates.BRL;
+      var eurBrl = data.rates.BRL / data.rates.EUR;
+      document.querySelectorAll('[data-usd-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(usdBrl); });
+      document.querySelectorAll('[data-eur-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(eurBrl); });
+      document.querySelectorAll('[data-rate-date]').forEach(function(el){ el.textContent = data.date; });
+    }catch(e){
+      document.querySelectorAll('[data-usd-brl],[data-eur-brl]').forEach(function(el){ if(el.textContent==='carregando…') el.textContent = 'indisponível'; });
+    }
+  }
+  updateRates();
+  setInterval(updateRates, 5*60*1000);
 })();
 </script>
 
