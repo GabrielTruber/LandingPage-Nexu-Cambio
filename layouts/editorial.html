@@ -52,7 +52,7 @@
 
   header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb, var(--bg) 90%, transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:22px;}
-  .brand img{height:30px;width:auto;display:block;}
+  .brand img{height:56px;width:auto;display:block;}
   nav ul{list-style:none;display:flex;gap:32px;margin:0;padding:0;font-family:'Instrument Sans',sans-serif;font-size:.85rem;letter-spacing:.02em;}
   nav ul li a{text-decoration:none;color:var(--ink-soft);border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s,color .2s;}
   nav ul li a:hover{color:var(--ink);border-color:var(--accent);}
@@ -106,19 +106,28 @@
   .wa-float svg{width:24px;height:24px;fill:var(--bg);}
 
   .marquee-bar{border-block:1px solid var(--line);overflow:hidden;}
-  .marquee-track{display:flex;width:max-content;animation:marquee-scroll 24s linear infinite;}
-  @media (prefers-reduced-motion: reduce){ .marquee-track{animation:none;} }
+  .marquee-track{display:flex;justify-content:center;flex-wrap:wrap;}
   .marquee-item{display:flex;align-items:center;gap:10px;padding:14px 36px;font-family:'Instrument Sans',sans-serif;font-size:.88rem;white-space:nowrap;border-right:1px solid var(--line);}
   .marquee-item .pair{color:var(--accent);font-style:italic;}
   .marquee-item .val{font-variant-numeric:tabular-nums;}
-  @keyframes marquee-scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
+  .partners-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);}
+  .partner{background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 14px 16px;display:flex;flex-direction:column;gap:12px;text-align:center;color:#1a1a1a;}
+  .partner .logo{height:84px;display:flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:0;}
+  .partner .logo img{max-width:100%;max-height:44px;object-fit:contain;}
+  .partner.lg .logo img{max-height:64px;}
+  .partner.dark .logo{background:#14181a;}
+  .partner.topazio .logo{background:#414549;}
+  .partner.black .logo{background:#000;}
+  .partner .pname{font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:500;font-size:1.15rem;}
+  @media (max-width:760px){.partners-grid{grid-template-columns:repeat(2,1fr);}}
   .partners-note{border:1px dashed var(--line);padding:28px;text-align:center;color:var(--ink-soft);font-family:'Instrument Sans',sans-serif;font-size:.92rem;}
 
   .process-strip{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);}
   @media (max-width:760px){ .process-strip{grid-template-columns:1fr 1fr;} }
   .process-cell{padding:28px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
   .process-cell:nth-child(4n){border-right:none;}
+  .process-strip .process-cell:last-child{border-right:none;}
   @media (max-width:760px){ .process-cell:nth-child(2n){border-right:none;} }
   .process-cell .idx{font-family:'Instrument Sans',sans-serif;color:var(--accent);font-size:.85rem;}
   .process-cell h4{font-size:1.1rem;margin-top:10px;}
@@ -199,9 +208,10 @@
 <section id="cambio">
   <div class="wrap">
     <div class="reveal" style="margin-bottom:8px;"><div class="index-label">Câmbio em tempo real</div></div>
-    <div class="process-strip reveal" style="grid-template-columns:repeat(2,1fr);">
+    <div class="process-strip reveal" style="grid-template-columns:repeat(3,1fr);">
       <div class="process-cell"><div class="idx">USD / BRL</div><h4 data-usd-brl>carregando…</h4><p>Dólar americano</p></div>
       <div class="process-cell"><div class="idx">EUR / BRL</div><h4 data-eur-brl>carregando…</h4><p>Euro</p></div>
+      <div class="process-cell"><div class="idx">GBP / BRL</div><h4 data-gbp-brl>carregando…</h4><p>Libra esterlina</p></div>
     </div>
   </div>
 </section>
@@ -210,8 +220,7 @@
   <div class="marquee-track">
     <span class="marquee-item"><span class="pair">USD/BRL</span><span class="val" data-usd-brl>carregando…</span></span>
     <span class="marquee-item"><span class="pair">EUR/BRL</span><span class="val" data-eur-brl>carregando…</span></span>
-    <span class="marquee-item"><span class="pair">USD/BRL</span><span class="val" data-usd-brl>carregando…</span></span>
-    <span class="marquee-item"><span class="pair">EUR/BRL</span><span class="val" data-eur-brl>carregando…</span></span>
+    <span class="marquee-item"><span class="pair">GBP/BRL</span><span class="val" data-gbp-brl>carregando…</span></span>
   </div>
 </div>
 
@@ -221,7 +230,16 @@
     <div class="reveal">
       <h2 style="font-size:1.8rem;margin-bottom:20px;">Bancos e instituições parceiras</h2>
     </div>
-    <div class="partners-note reveal">Lista de bancos e instituições parceiras em atualização.</div>
+    <div class="partners-grid reveal">
+      <div class="partner lg"><div class="logo"><img src="../assets/parceiros/travelex.png" alt="Travelex" loading="lazy" onerror="this.remove()"></div><span class="pname">Travelex</span></div>
+      <div class="partner"><div class="logo"><img src="../assets/parceiros/moneycorp.png" alt="Moneycorp" loading="lazy" onerror="this.remove()"></div><span class="pname">Moneycorp</span></div>
+      <div class="partner dark"><div class="logo"><img src="../assets/parceiros/oz-corretora.png" alt="Oz Corretora" loading="lazy" onerror="this.remove()"></div><span class="pname">Oz Corretora</span></div>
+      <div class="partner"><div class="logo"><img src="../assets/parceiros/freex-corretora.svg" alt="Freex Corretora" loading="lazy" onerror="this.remove()"></div><span class="pname">Freex Corretora</span></div>
+      <div class="partner topazio"><div class="logo"><img src="../assets/parceiros/topazio.png" alt="Topázio" loading="lazy" onerror="this.remove()"></div><span class="pname">Topázio</span></div>
+      <div class="partner black"><div class="logo"><img src="../assets/parceiros/sttart.png" alt="Sttart" loading="lazy" onerror="this.remove()"></div><span class="pname">Sttart</span></div>
+      <div class="partner"><div class="logo"><img src="../assets/parceiros/mercado-bitcoin.svg" alt="Mercado Bitcoin" loading="lazy" onerror="this.remove()"></div><span class="pname">Mercado Bitcoin</span></div>
+      <div class="partner lg"><div class="logo"><img src="../assets/parceiros/bloquo.png" alt="Bloquo" loading="lazy" onerror="this.remove()"></div><span class="pname">Bloquo</span></div>
+    </div>
   </div>
 </section>
 
@@ -262,19 +280,22 @@
   function fmt(n){ return n.toLocaleString('pt-BR',{minimumFractionDigits:4,maximumFractionDigits:4}); }
   async function updateRates(){
     try{
-      var res = await fetch('https://api.frankfurter.app/latest?from=USD&to=BRL,EUR');
+      var res = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,GBP-BRL', {cache:'no-store'});
       if(!res.ok) throw new Error('bad response');
       var data = await res.json();
-      var usdBrl = data.rates.BRL;
-      var eurBrl = data.rates.BRL / data.rates.EUR;
+      var usdBrl = parseFloat(data.USDBRL.bid);
+      var eurBrl = parseFloat(data.EURBRL.bid);
+      var gbpBrl = parseFloat(data.GBPBRL.bid);
+      var when = data.USDBRL.create_date.slice(11,16);
       document.querySelectorAll('[data-usd-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(usdBrl); });
       document.querySelectorAll('[data-eur-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(eurBrl); });
+      document.querySelectorAll('[data-gbp-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(gbpBrl); });
     }catch(e){
-      document.querySelectorAll('[data-usd-brl],[data-eur-brl]').forEach(function(el){ if(el.textContent==='carregando…') el.textContent = 'indisponível'; });
+      document.querySelectorAll('[data-usd-brl],[data-eur-brl],[data-gbp-brl]').forEach(function(el){ if(el.textContent==='carregando…') el.textContent = 'indisponível'; });
     }
   }
   updateRates();
-  setInterval(updateRates, 5*60*1000);
+  setInterval(updateRates, 30*1000);
 })();
 </script>
 

@@ -82,7 +82,7 @@
   }
   .nav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:18px;}
   .brand{display:flex;align-items:center;gap:0;}
-  .brand img{height:34px;width:auto;display:block;}
+  .brand img{height:60px;width:auto;display:block;}
   nav ul{list-style:none;display:flex;gap:28px;margin:0;padding:0;font-family:'Inter',sans-serif;font-size:.92rem;}
   nav ul li a{text-decoration:none;color:var(--ink-soft);transition:color .2s;}
   nav ul li a:hover{color:var(--gold);}
@@ -148,15 +148,23 @@
 
   /* live ticker */
   .ticker-bar{background:var(--navy);border-block:1px solid var(--line);overflow:hidden;}
-  .ticker-track{display:flex;width:max-content;animation:ticker-scroll 26s linear infinite;}
-  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
+  .ticker-track{display:flex;justify-content:center;flex-wrap:wrap;}
   .ticker-item{display:flex;align-items:center;gap:10px;padding:14px 36px;font-family:'Inter',sans-serif;font-size:.92rem;color:#EDF1FA;white-space:nowrap;border-right:1px solid rgba(237,241,250,.15);}
   .ticker-item .pair{color:var(--gold);font-weight:700;}
   .ticker-item .val{font-variant-numeric:tabular-nums;font-weight:600;}
   .ticker-item .live-dot{width:6px;height:6px;border-radius:50%;background:#7FBF8E;flex:none;}
-  @keyframes ticker-scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
   /* partners placeholder */
+  .partners-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .partner{background:#fff;border:1px solid var(--line);border-radius:6px;padding:14px 14px 16px;display:flex;flex-direction:column;gap:12px;text-align:center;color:#0B1F3A;}
+  .partner .logo{height:84px;display:flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:6px;}
+  .partner .logo img{max-width:100%;max-height:44px;object-fit:contain;}
+  .partner.lg .logo img{max-height:64px;}
+  .partner.dark .logo{background:#14181a;}
+  .partner.topazio .logo{background:#414549;}
+  .partner.black .logo{background:#000;}
+  .partner .pname{font-family:'Poppins','Inter',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:.01em;}
+  @media (max-width:760px){.partners-grid{grid-template-columns:repeat(2,1fr);}}
   .partners-note{border:1px dashed var(--line);border-radius:6px;padding:28px;text-align:center;color:var(--ink-soft);font-family:'Inter',sans-serif;font-size:.92rem;}
 
   /* contact */
@@ -202,8 +210,7 @@
   <div class="ticker-track" id="ticker-track">
     <span class="ticker-item"><span class="live-dot"></span><span class="pair">USD/BRL</span><span class="val" data-usd-brl>carregando…</span></span>
     <span class="ticker-item"><span class="live-dot"></span><span class="pair">EUR/BRL</span><span class="val" data-eur-brl>carregando…</span></span>
-    <span class="ticker-item"><span class="live-dot"></span><span class="pair">USD/BRL</span><span class="val" data-usd-brl>carregando…</span></span>
-    <span class="ticker-item"><span class="live-dot"></span><span class="pair">EUR/BRL</span><span class="val" data-eur-brl>carregando…</span></span>
+    <span class="ticker-item"><span class="live-dot"></span><span class="pair">GBP/BRL</span><span class="val" data-gbp-brl>carregando…</span></span>
   </div>
 </div>
 
@@ -223,8 +230,9 @@
       <div class="rate-list">
         <div class="rate-row"><span class="rate-pair">USD / BRL</span><span class="rate-val" data-usd-brl>carregando…</span></div>
         <div class="rate-row"><span class="rate-pair">EUR / BRL</span><span class="rate-val" data-eur-brl>carregando…</span></div>
+        <div class="rate-row"><span class="rate-pair">GBP / BRL</span><span class="rate-val" data-gbp-brl>carregando…</span></div>
       </div>
-      <div class="rate-foot">Fonte: Frankfurter (BCE) · atualizado <span data-rate-date>agora</span></div>
+      <div class="rate-foot">Fonte: AwesomeAPI · atualizado <span data-rate-date>agora</span></div>
     </div>
   </div>
 </section>
@@ -275,7 +283,16 @@
       <h2>Bancos e instituições parceiras</h2>
       <p class="sans">Operamos com acesso a múltiplas instituições financeiras para buscar as melhores condições em cada operação.</p>
     </div>
-    <div class="partners-note reveal">Lista de bancos e instituições parceiras em atualização.</div>
+    <div class="partners-grid reveal">
+      <div class="partner lg"><div class="logo"><img src="../assets/parceiros/travelex.png" alt="Travelex" loading="lazy" onerror="this.remove()"></div><span class="pname">Travelex</span></div>
+      <div class="partner"><div class="logo"><img src="../assets/parceiros/moneycorp.png" alt="Moneycorp" loading="lazy" onerror="this.remove()"></div><span class="pname">Moneycorp</span></div>
+      <div class="partner dark"><div class="logo"><img src="../assets/parceiros/oz-corretora.png" alt="Oz Corretora" loading="lazy" onerror="this.remove()"></div><span class="pname">Oz Corretora</span></div>
+      <div class="partner"><div class="logo"><img src="../assets/parceiros/freex-corretora.svg" alt="Freex Corretora" loading="lazy" onerror="this.remove()"></div><span class="pname">Freex Corretora</span></div>
+      <div class="partner topazio"><div class="logo"><img src="../assets/parceiros/topazio.png" alt="Topázio" loading="lazy" onerror="this.remove()"></div><span class="pname">Topázio</span></div>
+      <div class="partner black"><div class="logo"><img src="../assets/parceiros/sttart.png" alt="Sttart" loading="lazy" onerror="this.remove()"></div><span class="pname">Sttart</span></div>
+      <div class="partner"><div class="logo"><img src="../assets/parceiros/mercado-bitcoin.svg" alt="Mercado Bitcoin" loading="lazy" onerror="this.remove()"></div><span class="pname">Mercado Bitcoin</span></div>
+      <div class="partner lg"><div class="logo"><img src="../assets/parceiros/bloquo.png" alt="Bloquo" loading="lazy" onerror="this.remove()"></div><span class="pname">Bloquo</span></div>
+    </div>
   </div>
 </section>
 
@@ -331,20 +348,23 @@
   function fmt(n){ return n.toLocaleString('pt-BR',{minimumFractionDigits:4,maximumFractionDigits:4}); }
   async function updateRates(){
     try{
-      var res = await fetch('https://api.frankfurter.app/latest?from=USD&to=BRL,EUR');
+      var res = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,GBP-BRL', {cache:'no-store'});
       if(!res.ok) throw new Error('bad response');
       var data = await res.json();
-      var usdBrl = data.rates.BRL;
-      var eurBrl = data.rates.BRL / data.rates.EUR;
+      var usdBrl = parseFloat(data.USDBRL.bid);
+      var eurBrl = parseFloat(data.EURBRL.bid);
+      var gbpBrl = parseFloat(data.GBPBRL.bid);
+      var when = data.USDBRL.create_date.slice(11,16);
       document.querySelectorAll('[data-usd-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(usdBrl); });
       document.querySelectorAll('[data-eur-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(eurBrl); });
-      document.querySelectorAll('[data-rate-date]').forEach(function(el){ el.textContent = data.date; });
+      document.querySelectorAll('[data-gbp-brl]').forEach(function(el){ el.textContent = 'R$ ' + fmt(gbpBrl); });
+      document.querySelectorAll('[data-rate-date]').forEach(function(el){ el.textContent = 'hoje ' + when; });
     }catch(e){
-      document.querySelectorAll('[data-usd-brl],[data-eur-brl]').forEach(function(el){ if(el.textContent==='carregando…') el.textContent = 'indisponível'; });
+      document.querySelectorAll('[data-usd-brl],[data-eur-brl],[data-gbp-brl]').forEach(function(el){ if(el.textContent==='carregando…') el.textContent = 'indisponível'; });
     }
   }
   updateRates();
-  setInterval(updateRates, 5*60*1000);
+  setInterval(updateRates, 30*1000);
 })();
 </script>
 
