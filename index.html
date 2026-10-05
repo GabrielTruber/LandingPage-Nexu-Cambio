@@ -3,31 +3,828 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexo Câmbio — Landing Pages</title>
+<title>Nexo Câmbio</title>
+<meta name="description" content="Nexo Câmbio — a fintech exclusiva do Comércio Exterior. Hub multibancos, mesa de câmbio personalizada e as melhores condições para o seu câmbio.">
+<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+<!-- Animações de scroll (AOS) e ícones (Lucide) -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+
 <style>
-  :root{color-scheme:light dark;--bg:#0E1210;--panel:#161B18;--ink:#EDF2EE;--ink-soft:#9BA8A0;--accent:#FF7A45;--line:#2A322D;}
-  *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;padding:64px 24px;}
-  .wrap{max-width:900px;margin:0 auto;}
-  h1{font-size:2rem;margin:0 0 8px;}
-  p.lead{color:var(--ink-soft);margin:0 0 48px;}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  @media (max-width:760px){.grid{grid-template-columns:1fr;}}
-  a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px;text-decoration:none;color:var(--ink);transition:transform .2s,border-color .2s;}
-  a.card:hover{transform:translateY(-4px);border-color:var(--accent);}
-  a.card h2{margin:0 0 8px;font-size:1.2rem;}
-  a.card p{margin:0;color:var(--ink-soft);font-size:.92rem;}
+  :root{
+    --navy:#081F61;
+    --navy-deep:#081B51;
+    --gold:#C4942D;
+    --gold-dark:#A67B22;
+    --paper:#F8F9FC;
+    --bg:#FAFAFA;
+    --ink:#1F2937;
+    --ink-soft:#4B5563;
+    --line:#E5E7EB;
+    --up:#4ADE80;
+    --down:#F87171;
+    --rates-h:40px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:auto;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,p,ul{margin:0;padding:0;}
+  ul{list-style:none;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  i[data-lucide],svg.lucide{width:24px;height:24px;flex:none;}
+
+  .container{max-width:1280px;margin:0 auto;padding-inline:24px;width:100%;}
+  section{position:relative;}
+  .sec{padding-block:96px;}
+  .center{text-align:center;}
+  .gold{color:var(--gold);}
+  .eyebrow{
+    color:var(--gold);font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    font-size:.875rem;display:flex;align-items:center;gap:8px;margin-bottom:16px;
+  }
+  .eyebrow.c{justify-content:center;}
+  .eyebrow i,.eyebrow svg{width:16px;height:16px;}
+  .h2{font-size:2.25rem;line-height:2.5rem;font-weight:700;}
+  .navy{color:var(--navy);}
+
+  /* ---------- Cabeçalho fixo: cotações + navbar ---------- */
+  .site-header{position:fixed;inset:0 0 auto 0;z-index:50;}
+
+  .rates{
+    height:var(--rates-h);background:var(--navy-deep);color:#fff;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    font-size:.8125rem;
+  }
+  .rates .container{height:100%;display:flex;align-items:center;justify-content:center;gap:28px;}
+  .rates-live{
+    display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;font-size:.6875rem;color:var(--gold);
+  }
+  .live-dot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--up);}
+  .live-dot::after{
+    content:"";position:absolute;inset:0;border-radius:50%;background:var(--up);
+    animation:ping 1.8s cubic-bezier(0,0,.2,1) infinite;
+  }
+  .rates.is-stale .live-dot,.rates.is-stale .live-dot::after{background:#9CA3AF;animation:none;}
+  @keyframes ping{75%,100%{transform:scale(2.6);opacity:0;}}
+  .rate{display:flex;align-items:baseline;gap:8px;white-space:nowrap;}
+  .rate .sym{
+    display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;
+    background:var(--gold);color:#fff;font-weight:700;font-size:.75rem;align-self:center;
+  }
+  .rate .name{color:#D1D5DB;}
+  .rate .val{font-weight:700;font-variant-numeric:tabular-nums;font-size:.9375rem;transition:color .4s;}
+  .rate .chg{font-size:.75rem;font-variant-numeric:tabular-nums;color:#9CA3AF;}
+  .rate .chg.up{color:var(--up);} .rate .chg.down{color:var(--down);}
+  .rate .val.flash-up{color:var(--up);} .rate .val.flash-down{color:var(--down);}
+  .rates-meta{color:#9CA3AF;font-size:.6875rem;white-space:nowrap;}
+  .rates-sep{width:1px;height:16px;background:rgba(255,255,255,.18);}
+
+  .nav{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.05);padding-block:24px;transition:all .5s;}
+  .nav.scrolled{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);padding-block:8px;}
+  .nav .container{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .logo img{height:80px;width:auto;object-fit:contain;transition:height .5s,transform .3s;}
+  .logo:hover img{transform:scale(1.05);}
+  .nav.scrolled .logo img{height:56px;}
+  .nav-links{display:none;gap:32px;font-weight:500;color:var(--navy);}
+  .nav-links a{transition:color .3s;}
+  .nav-links a:hover{color:var(--gold);}
+  .btn-pill{
+    background:var(--gold);color:#fff;padding:8px 24px;border-radius:999px;font-weight:600;
+    box-shadow:0 4px 6px -1px rgba(0,0,0,.1);transition:all .3s;white-space:nowrap;
+  }
+  .btn-pill:hover{background:var(--gold-dark);}
+
+  /* ---------- 1. Hero ---------- */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;background:var(--navy);overflow:hidden;
+    padding-top:calc(var(--hdr,220px) + 16px);padding-bottom:48px;
+  }
+  .hero-bg{
+    position:absolute;inset:0;opacity:.2;mix-blend-mode:overlay;
+    background:url('https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&q=80') center/cover;
+  }
+  .hero-shade{position:absolute;inset:0;background:linear-gradient(to right,var(--navy),rgba(8,27,81,.9),transparent);}
+  .hero-grid{position:relative;z-index:10;display:grid;grid-template-columns:minmax(0,1fr);gap:48px;align-items:center;}
+  .hero h1{font-size:3rem;line-height:1.1;font-weight:700;color:#fff;margin-bottom:24px;}
+  .hero p.lead{font-size:1.25rem;line-height:1.625;color:#D1D5DB;font-weight:300;max-width:32rem;margin-bottom:40px;}
+  .hero-cta{display:flex;flex-direction:column;gap:16px;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:16px 32px;border-radius:999px;font-weight:600;transition:all .3s;
+  }
+  .btn svg,.btn i{width:20px;height:20px;}
+  .btn-gold{background:var(--gold);color:#fff;box-shadow:0 10px 15px -3px rgba(0,0,0,.2);}
+  .btn-gold:hover{background:#fff;color:var(--navy);box-shadow:0 20px 25px -5px rgba(0,0,0,.25);}
+  .btn-ghost{border:1px solid rgba(255,255,255,.3);color:#fff;}
+  .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+  .hero-art{display:none;justify-content:center;align-items:center;position:relative;}
+  .hero-art img{width:100%;border-radius:4px;}
+  .hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--navy),transparent);}
+
+  /* ---------- 2. Sobre ---------- */
+  .about{background:#fff;}
+  .split{display:grid;grid-template-columns:minmax(0,1fr);gap:64px;align-items:center;}
+  .about .h2{margin-bottom:32px;}
+  .about p{font-size:1.125rem;line-height:1.625;color:var(--ink-soft);margin-bottom:24px;}
+  .quote{
+    padding:24px;border-left:4px solid var(--gold);background:var(--paper);
+    border-radius:0 8px 8px 0;box-shadow:0 1px 2px rgba(0,0,0,.05);margin-top:32px;
+  }
+  .about .quote p{font-size:1.25rem;font-weight:500;color:var(--navy);font-style:italic;margin:0;}
+  .photo{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);}
+  .photo-about{height:500px;background:var(--navy-deep);}
+  .photo .bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+  .photo-about .bg{
+    background-image:url('assets/img3.jpg');mix-blend-mode:luminosity;opacity:.5;
+    transition:opacity .7s,transform .7s;
+  }
+  .photo-about:hover .bg{opacity:.7;transform:scale(1.05);}
+  .photo-about .shade{position:absolute;inset:0;background:linear-gradient(to top right,rgba(8,31,97,.9),rgba(8,31,97,.4),transparent);}
+  .photo-caption{position:absolute;left:32px;right:32px;bottom:32px;color:#fff;z-index:2;}
+  .photo-caption .row{display:flex;align-items:center;gap:16px;margin-bottom:16px;}
+  .photo-caption .row svg,.photo-caption .row i{width:32px;height:32px;color:var(--gold);}
+  .photo-caption .row span{font-size:1.5rem;font-weight:700;}
+  .bar{height:4px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden;}
+  .bar>div{height:100%;width:0;background:var(--gold);transition:width 1.6s cubic-bezier(.22,1,.36,1) .3s;}
+  .photo-about.aos-animate .bar>div{width:66.6%;}
+
+  /* ---------- 3. Metodologia ---------- */
+  .method{background:var(--navy);color:#fff;overflow:hidden;}
+  .method .slash{
+    position:absolute;right:0;top:0;width:33.333%;height:100%;background:var(--gold);opacity:.1;
+    transform:translateX(80px) skewX(12deg);
+  }
+  .method .container{position:relative;z-index:10;}
+  .method .head{text-align:center;margin-bottom:64px;}
+  .method .head .h2{margin-bottom:16px;}
+  .method .head p{font-size:1.25rem;color:#D1D5DB;font-weight:300;max-width:42rem;margin-inline:auto;}
+  .steps{display:grid;gap:32px;position:relative;}
+  .steps-line{display:none;position:absolute;top:32px;left:48px;width:calc(100% - 6rem);height:2px;background:rgba(255,255,255,.1);}
+  .step{position:relative;z-index:10;text-align:center;}
+  .step .n{
+    width:64px;height:64px;margin:0 auto 24px;border-radius:50%;background:var(--navy-deep);
+    border:2px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;
+    font-size:1.5rem;font-weight:700;box-shadow:0 10px 15px -3px rgba(196,148,45,.1);transition:all .3s;
+  }
+  .step:hover .n{background:var(--gold);color:#fff;}
+  .step h3{font-size:1.125rem;font-weight:700;margin-bottom:12px;}
+  .step p{font-size:.875rem;line-height:1.625;color:#9CA3AF;}
+  .step:last-child p{color:#D1D5DB;}
+
+  /* ---------- 4. Soluções ---------- */
+  .solutions{background:var(--paper);}
+  .solutions .head{text-align:center;margin-bottom:64px;}
+  .solutions .head .h2{color:var(--navy);margin-bottom:16px;}
+  .solutions .head p{font-size:1.25rem;font-weight:500;color:var(--gold);}
+  .cards4{display:grid;gap:32px;}
+  .card{
+    background:#fff;padding:32px;border-radius:16px;border:1px solid #F3F4F6;
+    box-shadow:0 1px 2px rgba(0,0,0,.05);
+    transition:box-shadow .3s,transform .3s;
+  }
+  .card:hover{box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);transform:translateY(-8px);}
+  .card .ic{
+    width:56px;height:56px;border-radius:50%;background:var(--paper);color:var(--navy);
+    display:flex;align-items:center;justify-content:center;margin-bottom:24px;transition:all .3s;
+  }
+  .card:hover .ic{background:var(--navy);color:#fff;}
+  .card h3{font-size:1.125rem;line-height:1.25;font-weight:700;color:var(--navy);margin-bottom:12px;}
+  .card p{color:var(--ink-soft);}
+
+  /* ---------- 5. Importação e exportação ---------- */
+  .comex{background:var(--navy);color:#fff;}
+  .comex .split{position:relative;z-index:10;}
+  .comex .h2{margin-bottom:32px;}
+  .comex .bq{font-size:1.125rem;color:#D1D5DB;border-left:2px solid var(--gold);padding-left:16px;margin-bottom:24px;}
+  .comex .bq.last{margin-bottom:40px;}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .chip{
+    display:flex;align-items:center;gap:8px;background:var(--navy-deep);padding:16px;border-radius:8px;
+    border:1px solid rgba(255,255,255,.1);transition:border-color .3s;
+  }
+  .chip:hover{border-color:var(--gold);}
+  .chip svg,.chip i{color:var(--gold);}
+  .chip span{font-size:.875rem;font-weight:500;}
+  .photo-comex{height:500px;}
+  .photo-comex .bg{background-image:url('assets/img2.jpg');opacity:.8;transition:transform 1s;}
+  .photo-comex:hover .bg{transform:scale(1.1);}
+  .photo-comex .shade{position:absolute;inset:0;background:linear-gradient(to top,var(--navy),transparent 50%);}
+
+  /* ---------- 6. Especialistas ---------- */
+  .experts{background:#fff;}
+  .experts h2{font-size:1.875rem;line-height:2.25rem;font-weight:700;color:var(--navy);text-align:center;max-width:48rem;margin:0 auto 64px;}
+  .cards2{display:grid;gap:32px;}
+  .expert{
+    padding:32px;background:var(--paper);border-radius:16px;border-top:4px solid var(--navy);transition:border-color .3s;
+  }
+  .expert:hover{border-color:var(--gold);}
+  .expert h3{font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:16px;}
+  .expert p{color:var(--ink-soft);}
+
+  /* ---------- 7. Envie e receba ---------- */
+  .send{background:var(--bg);border-block:1px solid var(--line);}
+  .send .h2{color:var(--navy);margin-bottom:16px;}
+  .send h3.sub{font-size:1.25rem;font-weight:500;color:var(--gold);margin-bottom:24px;}
+  .send .txt{color:var(--ink-soft);margin-bottom:32px;}
+  .bullets{display:flex;flex-direction:column;gap:16px;}
+  .bullets li{display:flex;align-items:flex-start;gap:12px;}
+  .bullets li::before{content:"";flex:none;margin-top:8px;width:8px;height:8px;border-radius:50%;background:var(--gold);}
+  .bullets span{color:#374151;font-weight:500;}
+  .photo-send{height:600px;background:var(--navy-deep);}
+  .photo-send .bg{background-image:url('assets/img1.jpg');mix-blend-mode:overlay;opacity:.4;transition:transform 1s;}
+  .photo-send:hover .bg{transform:scale(1.1);}
+  .photo-send .over{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:32px;background:linear-gradient(to top,rgba(8,31,97,.9),transparent 50%);
+  }
+  .photo-send .badge{
+    background:rgba(255,255,255,.1);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+    padding:24px;border-radius:50%;margin-bottom:24px;border:1px solid rgba(255,255,255,.2);
+  }
+  .photo-send .badge svg,.photo-send .badge i{width:48px;height:48px;color:var(--gold);display:block;}
+  .photo-send h3{font-size:1.875rem;font-weight:700;color:#fff;margin-bottom:12px;}
+  .photo-send p{font-size:1.125rem;color:#E5E7EB;max-width:24rem;}
+
+  /* ---------- 8. Números ---------- */
+  .numbers{background:var(--gold);color:#fff;overflow:hidden;padding-block:64px;}
+  .numbers .bg{
+    position:absolute;inset:0;opacity:.2;mix-blend-mode:multiply;
+    background:url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80') center/cover;
+  }
+  .numbers .container{position:relative;z-index:10;}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:32px;text-align:center;}
+  .stat{padding:16px;}
+  .stat .big{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;}
+  .stat .big svg,.stat .big i{width:24px;height:24px;color:rgba(255,255,255,.7);}
+  .stat .big p{font-size:2.25rem;line-height:1;font-weight:700;font-variant-numeric:tabular-nums;}
+  .stat .lbl{color:rgba(255,255,255,.9);font-weight:600;text-transform:uppercase;font-size:.75rem;letter-spacing:.1em;margin-top:8px;}
+
+  /* ---------- Parceiros ---------- */
+  .partners{background:#fff;}
+  .partners .head{text-align:center;margin-bottom:56px;}
+  .partners .head .h2{color:var(--navy);margin-bottom:16px;}
+  .partners .head p{font-size:1.125rem;color:var(--ink-soft);max-width:40rem;margin-inline:auto;}
+  .partner-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .partner{
+    display:flex;flex-direction:column;align-items:center;gap:16px;padding:24px;
+    background:var(--paper);border-radius:16px;border:1px solid #F3F4F6;
+    transition:box-shadow .3s,transform .3s,border-color .3s;
+  }
+  .partner:hover{box-shadow:0 20px 25px -5px rgba(0,0,0,.1);transform:translateY(-6px);border-color:rgba(196,148,45,.5);}
+  /* Espaço reservado para o logo — basta colocar um <img> dentro de .partner-slot */
+  .partner-slot{
+    width:100%;height:96px;display:flex;align-items:center;justify-content:center;
+    border:2px dashed #D6DAE6;border-radius:12px;background:#fff;color:#B6BDD0;
+  }
+  .partner-slot svg,.partner-slot i{width:32px;height:32px;}
+  .partner-slot:has(img){border-style:solid;border-color:transparent;padding:12px;}
+  .partner-slot:has(img) svg,.partner-slot:has(img) i{display:none;}
+  .partner-slot img{max-height:100%;max-width:100%;object-fit:contain;}
+  .partner-name{font-weight:700;color:var(--navy);text-align:center;font-size:.9375rem;}
+
+  /* ---------- 9. Por que operar ---------- */
+  .why{background:#fff;}
+  .partners + .why{padding-top:0;}
+  .why h2{font-size:2.25rem;font-weight:700;color:var(--navy);margin-bottom:64px;}
+  .why-grid{display:grid;gap:32px;}
+  .why-item{display:flex;flex-direction:column;align-items:center;padding:24px;}
+  .why-item .ic{
+    width:64px;height:64px;border-radius:16px;background:var(--paper);border:1px solid rgba(8,31,97,.1);
+    display:flex;align-items:center;justify-content:center;margin-bottom:24px;color:var(--gold);
+    transition:transform .3s;
+  }
+  .why-item .ic:hover{transform:translateY(-4px);}
+  .why-item .ic svg,.why-item .ic i{width:32px;height:32px;}
+  .why-item h3{font-size:1.125rem;font-weight:700;color:var(--navy);margin-bottom:12px;}
+  .why-item p{font-size:.875rem;color:var(--ink-soft);}
+
+  /* ---------- 10. CTA ---------- */
+  .cta{
+    padding-block:128px;text-align:center;color:#fff;overflow:hidden;
+    background:linear-gradient(to bottom right,var(--navy),var(--navy-deep));
+  }
+  .cta .bg{
+    position:absolute;inset:0;opacity:.2;mix-blend-mode:overlay;
+    background:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80') center/cover;
+  }
+  .cta .inner{position:relative;z-index:10;max-width:48rem;margin:0 auto;padding-inline:24px;}
+  .cta h2{font-size:3rem;line-height:1;font-weight:700;margin-bottom:24px;}
+  .cta p{font-size:1.25rem;color:#D1D5DB;margin-bottom:40px;}
+  .cta a{
+    display:inline-block;background:var(--gold);color:#fff;padding:16px 40px;border-radius:999px;
+    font-weight:700;font-size:1.125rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);transition:all .3s;
+  }
+  .cta a:hover{background:#fff;color:var(--navy);}
+
+  /* ---------- Rodapé ---------- */
+  footer{background:var(--bg);padding:64px 0 32px;border-top:1px solid var(--line);}
+  .foot-grid{display:grid;gap:48px;margin-bottom:48px;}
+  .foot-brand img{height:40px;margin-bottom:24px;}
+  .foot-brand p{color:#6B7280;font-weight:500;line-height:1.625;}
+  footer h4{font-weight:700;color:var(--navy);margin-bottom:24px;text-transform:uppercase;letter-spacing:.05em;font-size:.875rem;}
+  .contacts{display:grid;gap:32px;}
+  .contacts .nm{font-weight:700;color:#1F2937;}
+  .contacts .rl{color:#6B7280;font-size:.875rem;margin-bottom:4px;}
+  .contacts a{display:block;color:var(--navy);transition:color .2s;}
+  .contacts a:hover{color:var(--gold);}
+  .foot-bottom{
+    border-top:1px solid var(--line);padding-top:32px;color:#9CA3AF;font-size:.875rem;
+    display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;text-align:center;
+  }
+
+  /* ---------- WhatsApp flutuante ---------- */
+  .wa-float{
+    position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:40;
+    width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;
+    box-shadow:0 10px 25px -6px rgba(0,0,0,.4);transition:transform .3s;
+  }
+  .wa-float:hover{transform:scale(1.1);}
+  .wa-float svg{width:28px;height:28px;fill:#fff;}
+
+  .steps,.cards4,.cards2,.why-grid,.foot-grid,.contacts{grid-template-columns:minmax(0,1fr);}
+
+  /* ---------- Breakpoints (md 768 / lg 1024) ---------- */
+  @media (max-width:767px){
+    :root{--rates-h:44px;}
+    .rates .container{gap:14px;padding-inline:12px;}
+    .rates-live .txt,.rates-meta,.rates-sep,.rate .name,.rate .chg{display:none;}
+    .rate .val{font-size:.875rem;}
+    .logo img{height:64px;}
+    .nav{padding-block:16px;}
+    .btn-pill{padding:8px 16px;font-size:.875rem;}
+  }
+  @media (min-width:768px){
+    .nav-links{display:flex;}
+    .logo img{height:96px;}
+    .hero{padding-top:calc(var(--hdr,240px) + 8px);}
+    .hero h1{font-size:4.5rem;}
+    .hero-grid,.split,.cards2{grid-template-columns:1fr 1fr;}
+    .hero-cta{flex-direction:row;}
+    .hero-art{display:flex;}
+    .steps{grid-template-columns:repeat(4,1fr);}
+    .steps-line{display:block;}
+    .cards4{grid-template-columns:1fr 1fr;}
+    .experts h2{font-size:2.25rem;line-height:2.5rem;}
+    .stats{grid-template-columns:repeat(4,1fr);}
+    .stat+.stat{border-left:1px solid rgba(255,255,255,.2);}
+    .partner-grid{grid-template-columns:repeat(4,1fr);}
+    .why-grid{grid-template-columns:repeat(4,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:48px;}
+    .foot-bottom{flex-direction:row;}
+  }
+  @media (min-width:768px) and (max-width:1023px){
+    .stat:nth-child(odd){border-left:0;}
+  }
+  @media (min-width:1024px){
+    .cards4{grid-template-columns:repeat(4,1fr);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .live-dot::after{animation:none;}
+    .bar>div{transition:none;}
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Nexo Câmbio — Landing Pages</h1>
-    <p class="lead">Três propostas de layout one-page para apresentação a clientes, todas com scroll reveal.</p>
-    <div class="grid">
-      <a class="card" href="layouts/institucional.html"><h2>Institucional</h2><p>Azul-marinho e dourado — tom de corretora tradicional, confiável.</p></a>
-      <a class="card" href="layouts/fintech.html"><h2>Fintech</h2><p>Dark mode com ticker de cotações ao vivo — visual de produto tech.</p></a>
-      <a class="card" href="layouts/editorial.html"><h2>Editorial</h2><p>Minimalista, tipografia serifada — elegante e sóbrio.</p></a>
+
+<!-- ============ CABEÇALHO FIXO: COTAÇÕES AO VIVO + NAVBAR ============ -->
+<header class="site-header" id="site-header">
+  <div class="rates" id="rates" role="status" aria-live="off">
+    <div class="container">
+      <div class="rates-live"><span class="live-dot"></span><span class="txt">Ao vivo</span></div>
+      <div class="rate">
+        <span class="sym">$</span><span class="name">Dólar</span>
+        <span class="val" data-val="USD">…</span><span class="chg" data-chg="USD"></span>
+      </div>
+      <span class="rates-sep"></span>
+      <div class="rate">
+        <span class="sym">€</span><span class="name">Euro</span>
+        <span class="val" data-val="EUR">…</span><span class="chg" data-chg="EUR"></span>
+      </div>
+      <span class="rates-sep"></span>
+      <span class="rates-meta">Atualizado às <span id="rates-time">—</span></span>
     </div>
   </div>
+
+  <nav class="nav" id="navbar">
+    <div class="container">
+      <a href="#inicio" class="logo"><img src="assets/logo.png" alt="Nexo Câmbio"></a>
+      <div class="nav-links">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Nexo Câmbio</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#comex">Importação e Exportação</a>
+        <a href="#parceiros">Parceiros</a>
+      </div>
+      <a href="#contato" class="btn-pill">Vamos conversar?</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ 1. HERO ============ -->
+<section id="inicio" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-shade"></div>
+  <div class="container hero-grid">
+    <div data-aos="fade-up">
+      <h2 class="eyebrow"><i data-lucide="anchor"></i> A Fintech exclusiva do Comércio Exterior</h2>
+      <h1>Conectando empresas ao <br><span class="gold">Mercado Global</span></h1>
+      <p class="lead">Mais opções, mais poder de negociação e as melhores taxas operacionais. Seu câmbio, estruturado por especialistas.</p>
+      <div class="hero-cta">
+        <a href="#contato" class="btn btn-gold">Vamos conversar <i data-lucide="arrow-right"></i></a>
+        <a href="#solucoes" class="btn btn-ghost">Conheça nossas soluções</a>
+      </div>
+    </div>
+    <div class="hero-art" data-aos="zoom-in" data-aos-duration="1500">
+      <img src="assets/img4.jpg" alt="Globo com símbolos de moedas internacionais">
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. CONHEÇA A NEXO CÂMBIO ============ -->
+<section id="sobre" class="sec about">
+  <div class="container split">
+    <div data-aos="fade-right">
+      <h2 class="h2 navy">Conheça a Nexo Câmbio.</h2>
+      <p>A NEXO conecta empresas ao mercado financeiro global, reunindo soluções para tornar as operações de câmbio mais simples, eficientes e competitivas.</p>
+      <p>Nossa atuação como Hub Multibancos e o alto volume de operações negociadas nos permitem buscar condições institucionais diferenciadas, adequadas ao perfil e à necessidade de cada cliente.</p>
+      <div class="quote"><p>"Mais opções. Mais poder de negociação. Melhores condições para o seu câmbio."</p></div>
+    </div>
+    <div data-aos="fade-left" class="photo photo-about">
+      <div class="bg"></div>
+      <div class="shade"></div>
+      <div class="photo-caption">
+        <div class="row"><i data-lucide="trending-up"></i><span>Foco em Performance</span></div>
+        <div class="bar"><div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. COMO FUNCIONA ============ -->
+<section class="sec method">
+  <div class="slash"></div>
+  <div class="container">
+    <div class="head" data-aos="fade-up">
+      <h2 class="eyebrow c"><i data-lucide="git-merge"></i> Metodologia Nexo</h2>
+      <h2 class="h2">Como estruturamos sua operação</h2>
+      <p>Um processo transparente, ágil e focado em redução de custos em todas as etapas.</p>
+    </div>
+    <div class="steps">
+      <div class="steps-line"></div>
+      <div class="step" data-aos="fade-up" data-aos-delay="0">
+        <div class="n">1</div><h3>Análise &amp; Compliance</h3>
+        <p>Avaliamos a natureza da operação, documentação (ROF/RDE) e enquadramento regulatório.</p>
+      </div>
+      <div class="step" data-aos="fade-up" data-aos-delay="100">
+        <div class="n">2</div><h3>Busca Multibancos</h3>
+        <p>Cotamos simultaneamente em diversas instituições parceiras para garantir a menor taxa e melhor spread.</p>
+      </div>
+      <div class="step" data-aos="fade-up" data-aos-delay="200">
+        <div class="n">3</div><h3>Fechamento Ágil</h3>
+        <p>Aprovação rápida e trava da taxa de câmbio no momento mais oportuno do mercado global.</p>
+      </div>
+      <div class="step" data-aos="fade-up" data-aos-delay="300">
+        <div class="n">4</div><h3>Liquidação &amp; Report</h3>
+        <p>Confirmação de liquidação rápida, emissão de comprovantes (SWIFT) e suporte contínuo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. SOLUÇÕES ============ -->
+<section id="solucoes" class="sec solutions">
+  <div class="container">
+    <div class="head" data-aos="fade-up">
+      <h2 class="h2">Soluções completas em câmbio.</h2>
+      <p>Simples, Ágil, Vantajoso.</p>
+    </div>
+    <div class="cards4">
+      <div class="card" data-aos="fade-up" data-aos-delay="0"><div class="ic"><i data-lucide="clock"></i></div><h3>AGILIDADE CADASTRAL</h3><p>Cadastro desburocratizado e rápido.</p></div>
+      <div class="card" data-aos="fade-up" data-aos-delay="100"><div class="ic"><i data-lucide="headphones"></i></div><h3>MESA DE CÂMBIO PERSONALIZADA</h3><p>Operadores especializados em câmbio.</p></div>
+      <div class="card" data-aos="fade-up" data-aos-delay="200"><div class="ic"><i data-lucide="bar-chart-3"></i></div><h3>COMERCIAL</h3><p>Negociando spreads competitivos e condições exclusivas.</p></div>
+      <div class="card" data-aos="fade-up" data-aos-delay="300"><div class="ic"><i data-lucide="file-text"></i></div><h3>ANÁLISE CAMBIAL</h3><p>Análise e controle de documentos cambiais.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. IMPORTAÇÃO E EXPORTAÇÃO ============ -->
+<section id="comex" class="sec comex">
+  <div class="container split">
+    <div data-aos="fade-right">
+      <h2 class="h2">Importação e Exportação.</h2>
+      <p class="bq">Prestamos assessoria especializada no enquadramento e nos documentos necessários para suas remessas ao exterior.</p>
+      <p class="bq last">Fechamento de câmbio de sua importação ou exportação com o prazo máximo de pagamento em até dois dias úteis possibilitando a contratação da operação no momento ideal.</p>
+      <div class="chips">
+        <div class="chip"><i data-lucide="circle-check"></i><span>Pagamento à vista</span></div>
+        <div class="chip"><i data-lucide="circle-check"></i><span>Pagamento antecipado</span></div>
+        <div class="chip"><i data-lucide="circle-check"></i><span>Pagamento via prazo</span></div>
+        <div class="chip"><i data-lucide="circle-check"></i><span>Câmbio Futuro</span></div>
+      </div>
+    </div>
+    <div data-aos="fade-left" class="photo photo-comex">
+      <div class="bg"></div>
+      <div class="shade"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. ESPECIALISTAS ============ -->
+<section class="sec experts">
+  <div class="container">
+    <h2 data-aos="fade-up">Suporte e atendimento com time de especialistas em COMEX.</h2>
+    <div class="cards2">
+      <div class="expert" data-aos="fade-up" data-aos-delay="0"><h3>ATENDIMENTO PERSONALIZADO</h3><p>Entendemos sua estratégia internacional e alinhamos soluções sob medida para sua operação.</p></div>
+      <div class="expert" data-aos="fade-up" data-aos-delay="100"><h3>HUB MÚLTIPLAS INSTITUIÇÕES</h3><p>Oferecemos o serviço de acesso para buscar a melhor estrutura e condição para cada operação.</p></div>
+      <div class="expert" data-aos="fade-up" data-aos-delay="200"><h3>CONSULTORIA ESPECIALIZADA</h3><p>Suporte técnico em regulamentações cambiais (ROF, RDE - IED), compliance internacional, e otimização tributária.</p></div>
+      <div class="expert" data-aos="fade-up" data-aos-delay="300"><h3>EQUIPE MULTIDISCIPLINAR</h3><p>Profissionais certificados (ABT 1 &amp; ABT 2) para análise de compliance, enquadramento fiscal e gestão de risco cambial.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. ENVIE E RECEBA ============ -->
+<section class="sec send">
+  <div class="container split">
+    <div data-aos="fade-right">
+      <h2 class="h2">Envie e receba dinheiro.</h2>
+      <h3 class="sub">Remessas para:</h3>
+      <p class="txt">Remessas disponíveis nas principais moedas do mundo: Dólar, Euro, Libra, Yuan e outras moedas.</p>
+      <ul class="bullets">
+        <li><span>Enviar dinheiro para sua conta no exterior via Stablecoins</span></li>
+        <li><span>Receber ou fazer pagamentos para o exterior</span></li>
+        <li><span>Google AdSense ou plataformas digitais</span></li>
+        <li><span>Compra, venda ou locação de imóveis</span></li>
+        <li><span>Compra e locação de imóveis para brasileiros no exterior</span></li>
+        <li><span>Investimentos no exterior</span></li>
+      </ul>
+    </div>
+    <div data-aos="fade-left" class="photo photo-send">
+      <div class="bg"></div>
+      <div class="over">
+        <div class="badge"><i data-lucide="arrow-left-right"></i></div>
+        <h3>Alcance Global</h3>
+        <p>Conectando seu capital aos principais mercados com liquidez e segurança.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. NÚMEROS ============ -->
+<section class="numbers">
+  <div class="bg"></div>
+  <div class="container">
+    <div class="stats">
+      <div class="stat" data-aos="zoom-in" data-aos-delay="0">
+        <div class="big"><i data-lucide="landmark"></i><p data-count="449" data-prefix="R$ " data-suffix=" MM">R$ 449 MM</p></div>
+        <p class="lbl">Movimentados em 12 meses</p>
+      </div>
+      <div class="stat" data-aos="zoom-in" data-aos-delay="100">
+        <div class="big"><i data-lucide="timer"></i><p data-count="410.6" data-dec="1" data-prefix="R$ " data-suffix=" MM">R$ 410,6 MM</p></div>
+        <p class="lbl">Em câmbio pronto</p>
+      </div>
+      <div class="stat" data-aos="zoom-in" data-aos-delay="200">
+        <div class="big"><i data-lucide="shield-check"></i><p data-count="38.4" data-dec="1" data-prefix="R$ " data-suffix=" MM">R$ 38,4 MM</p></div>
+        <p class="lbl">Em stablecoin</p>
+      </div>
+      <div class="stat" data-aos="zoom-in" data-aos-delay="300">
+        <div class="big"><i data-lucide="globe"></i><p data-count="3748" data-sep="1">3.748</p></div>
+        <p class="lbl">Operações no período</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARCEIROS (espaços reservados para os logos) ============ -->
+<section id="parceiros" class="sec partners">
+  <div class="container">
+    <div class="head" data-aos="fade-up">
+      <h2 class="eyebrow c"><i data-lucide="landmark"></i> Hub Multibancos</h2>
+      <h2 class="h2">Bancos e instituições parceiras</h2>
+      <p>Acesso a múltiplas instituições financeiras para buscar as melhores condições em cada operação.</p>
+    </div>
+    <!--
+      Para colocar um logo: salve o arquivo em assets/bancos/ e adicione dentro do .partner-slot, por exemplo:
+      <div class="partner-slot"><i data-lucide="landmark"></i><img src="assets/bancos/travelex.png" alt="Travelex"></div>
+      (o ícone cinza some sozinho quando há uma imagem)
+    -->
+    <div class="partner-grid">
+      <div class="partner" data-aos="zoom-in" data-aos-delay="0"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Travelex</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="80"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Moneycorp</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="160"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Oz Corretora</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="240"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Freex Corretora</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="0"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Topázio</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="80"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Sttart</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="160"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Mercado Bitcoin</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="240"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Bloquo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. POR QUE OPERAR ============ -->
+<section class="sec why">
+  <div class="container center">
+    <h2 data-aos="fade-up">Por que operar com a Nexo?</h2>
+    <div class="why-grid">
+      <div class="why-item" data-aos="zoom-in" data-aos-delay="0"><div class="ic"><i data-lucide="landmark"></i></div><h3>MÚLTIPLAS INSTITUIÇÕES</h3><p>Acesso a diferentes parceiros para buscar condições mais competitivas.</p></div>
+      <div class="why-item" data-aos="zoom-in" data-aos-delay="100"><div class="ic"><i data-lucide="headphones"></i></div><h3>ATENDIMENTO CONSULTIVO</h3><p>Acompanhamento próximo, do cadastro à liquidação da operação.</p></div>
+      <div class="why-item" data-aos="zoom-in" data-aos-delay="200"><div class="ic"><i data-lucide="zap"></i></div><h3>AGILIDADE</h3><p>Processos simplificados para reduzir burocracia e acelerar o fechamento.</p></div>
+      <div class="why-item" data-aos="zoom-in" data-aos-delay="300"><div class="ic"><i data-lucide="piggy-bank"></i></div><h3>VISÃO DE ECONOMIA</h3><p>Comparativos claros para apoiar decisões e reduzir custos financeiros.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10. CTA ============ -->
+<section id="contato" class="cta">
+  <div class="bg"></div>
+  <div class="inner" data-aos="fade-up">
+    <h2>Vamos conversar?</h2>
+    <p>Conheça nosso modelo e compare condições sem compromisso.</p>
+    <a href="https://wa.me/5547999631711" target="_blank" rel="noopener">Entre em contato</a>
+  </div>
+</section>
+
+<!-- ============ RODAPÉ ============ -->
+<footer>
+  <div class="container foot-grid">
+    <div class="foot-brand">
+      <a href="#inicio"><img src="assets/logo2.png" alt="Nexo Câmbio"></a>
+      <p>A Fintech exclusiva do Comércio Exterior, conectando empresas ao mercado global com agilidade e inteligência financeira.</p>
+    </div>
+    <div>
+      <h4>Contato Comercial</h4>
+      <div class="contacts">
+        <div>
+          <p class="nm">LEONARDO PENAFORT</p><p class="rl">Comercial</p>
+          <a href="https://wa.me/5547999631711" target="_blank" rel="noopener">47 99963 1711</a>
+          <a href="mailto:leonardo@nexocambio.com.br">leonardo@nexocambio.com.br</a>
+        </div>
+        <div>
+          <p class="nm">FLÁDIO MENDES</p><p class="rl">Comercial · PR</p>
+          <a href="https://wa.me/5541987297007" target="_blank" rel="noopener">(41) 9 8729 7007</a>
+          <a href="mailto:fladiomendes@nexocambio.com.br">fladiomendes@nexocambio.com.br</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container foot-bottom">
+    <p>© 2026 Nexo Câmbio. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5547999631711" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s1 2.6 1.1 2.8c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.5-.3z"/></svg></a>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var header = document.getElementById('site-header');
+  var nav = document.getElementById('navbar');
+
+  /* Ícones + animações de entrada (mesmos efeitos do site de referência) */
+  window.addEventListener('load', function () {
+    if (window.lucide) lucide.createIcons();
+    if (window.AOS) AOS.init({ duration: 800, once: true, offset: 100, disable: reduceMotion });
+  });
+
+  /* Altura do cabeçalho fixo -> espaçamento do hero e destino das âncoras */
+  function syncHeaderHeight() {
+    document.documentElement.style.setProperty('--hdr', header.offsetHeight + 'px');
+  }
+  syncHeaderHeight();
+  window.addEventListener('resize', syncHeaderHeight);
+  if ('ResizeObserver' in window) new ResizeObserver(syncHeaderHeight).observe(header);
+
+  /* Navbar encolhe ao rolar */
+  function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 50); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Rolagem suave com easing cúbico (1,2s) até a seção, descontando o cabeçalho */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = this.getAttribute('href');
+      if (id === '#') return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      var dest = id === '#inicio' ? 0
+        : target.getBoundingClientRect().top + window.scrollY - header.offsetHeight + 1;
+      var from = window.scrollY, dist = dest - from;
+      if (reduceMotion) { window.scrollTo(0, dest); return; }
+      var dur = 1200, t0 = null;
+      window.requestAnimationFrame(function step(ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1);
+        var ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+        window.scrollTo(0, from + dist * ease);
+        if (p < 1) window.requestAnimationFrame(step);
+      });
+    });
+  });
+
+  /* Contadores animados da faixa dourada */
+  var counters = document.querySelectorAll('[data-count]');
+  function fmt(el, n) {
+    var dec = +el.dataset.dec || 0;
+    var s = n.toLocaleString('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    return (el.dataset.prefix || '') + s + (el.dataset.suffix || '');
+  }
+  function runCounter(el) {
+    var end = parseFloat(el.dataset.count), dur = 1800, t0 = null;
+    window.requestAnimationFrame(function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      el.textContent = fmt(el, end * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) window.requestAnimationFrame(step);
+    });
+  }
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { io.unobserve(en.target); runCounter(en.target); }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (c) { io.observe(c); });
+  }
+
+  /* ---------- Cotações em tempo real (dólar e euro) ---------- */
+  var ratesBar = document.getElementById('rates');
+  var timeEl = document.getElementById('rates-time');
+  var last = {};
+  var REFRESH_MS = 30000;
+
+  function money(n) { return 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 4, maximumFractionDigits: 4 }); }
+
+  function paint(code, q) {
+    var val = document.querySelector('[data-val="' + code + '"]');
+    var chg = document.querySelector('[data-chg="' + code + '"]');
+    val.textContent = money(q.bid);
+    if (last[code] !== undefined && q.bid !== last[code]) {
+      var cls = q.bid > last[code] ? 'flash-up' : 'flash-down';
+      val.classList.add(cls);
+      setTimeout(function () { val.classList.remove(cls); }, 1500);
+    }
+    last[code] = q.bid;
+    if (typeof q.pct === 'number' && isFinite(q.pct)) {
+      chg.textContent = (q.pct > 0 ? '▲ +' : q.pct < 0 ? '▼ ' : '') + q.pct.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
+      chg.className = 'chg ' + (q.pct > 0 ? 'up' : q.pct < 0 ? 'down' : '');
+    } else {
+      chg.textContent = '';
+    }
+  }
+
+  function getJSON(url) {
+    var ctl = 'AbortController' in window ? new AbortController() : null;
+    var timer = ctl && setTimeout(function () { ctl.abort(); }, 8000);
+    return fetch(url, { cache: 'no-store', signal: ctl ? ctl.signal : undefined }).then(function (r) {
+      if (timer) clearTimeout(timer);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+
+  function fromAwesome() {
+    return getJSON('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL').then(function (j) {
+      return {
+        USD: { bid: +j.USDBRL.bid, pct: +j.USDBRL.pctChange },
+        EUR: { bid: +j.EURBRL.bid, pct: +j.EURBRL.pctChange },
+        at: new Date(j.USDBRL.timestamp * 1000)
+      };
+    });
+  }
+  function fromFrankfurter() {   // reserva: cotação diária (BCE)
+    return getJSON('https://api.frankfurter.app/latest?from=USD&to=BRL,EUR').then(function (j) {
+      return {
+        USD: { bid: j.rates.BRL },
+        EUR: { bid: j.rates.BRL / j.rates.EUR },
+        at: new Date()
+      };
+    });
+  }
+
+  function update() {
+    fromAwesome().catch(fromFrankfurter).then(function (d) {
+      paint('USD', d.USD);
+      paint('EUR', d.EUR);
+      timeEl.textContent = d.at.toLocaleTimeString('pt-BR');
+      ratesBar.classList.remove('is-stale');
+    }).catch(function () {
+      ratesBar.classList.add('is-stale');
+      document.querySelectorAll('[data-val]').forEach(function (el) {
+        if (el.textContent === '…') el.textContent = 'indisponível';
+      });
+    });
+  }
+  update();
+  setInterval(update, REFRESH_MS);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) update(); });
+})();
+</script>
 </body>
 </html>

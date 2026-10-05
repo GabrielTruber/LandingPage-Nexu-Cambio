@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexo Câmbio — Landing Pages</title>
+<style>
+  :root{color-scheme:light dark;--bg:#0E1210;--panel:#161B18;--ink:#EDF2EE;--ink-soft:#9BA8A0;--accent:#FF7A45;--line:#2A322D;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;padding:64px 24px;}
+  .wrap{max-width:900px;margin:0 auto;}
+  h1{font-size:2rem;margin:0 0 48px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:760px){.grid{grid-template-columns:1fr;}}
+  a.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px;text-decoration:none;color:var(--ink);transition:transform .2s,border-color .2s;}
+  a.card:hover{transform:translateY(-4px);border-color:var(--accent);}
+  a.card h2{margin:0 0 8px;font-size:1.2rem;}
+  a.card p{margin:0;color:var(--ink-soft);font-size:.92rem;}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Nexo Câmbio — Landing Pages</h1>
+    <div class="grid">
+      <a class="card" href="layouts/institucional.html"><h2>Protótipo 1</h2><p>Azul-marinho e dourado — tom de corretora tradicional, confiável.</p></a>
+      <a class="card" href="layouts/fintech.html"><h2>Protótipo 2</h2><p>Dark mode com ticker de cotações ao vivo — visual de produto tech.</p></a>
+      <a class="card" href="layouts/editorial.html"><h2>Protótipo 3</h2><p>Minimalista, tipografia serifada — elegante e sóbrio.</p></a>
+    </div>
+  </div>
+</body>
+</html>
