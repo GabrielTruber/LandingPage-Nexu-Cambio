@@ -13,7 +13,7 @@ Landing page one-page da Nexo Câmbio, vendida a um cliente que já tem domínio
 - Hospedagem estática (GitHub Pages ou Cloudflare Pages), **sem VM**. Só o domínio custa (~R$ 40/ano). Para ligar o domínio do cliente: arquivo `CNAME` na raiz + DNS (CNAME `www` → `gabrieltruber.github.io`; 4 IPs A do GitHub para o domínio raiz — confirmar na doc oficial).
 - Cotação **não é tempo real puro**: a API gratuita tem cache de ~5 min e fica parada com o mercado fechado. O WebSocket da AwesomeAPI foi testado e **não funcionou**.
 - O usuário **não gosta de frases que "sujam a tela"** (textos de marketing/rótulos extras). Evitar inventar texto; preferir só o conteúdo do deck.
-- Fora do git de propósito (`.gitignore`): `Logos/` (cópias das logos) e `*.pptx` (deck com conteúdo "Confidencial"; repo público). Em casa, peça o deck `NEXO_CAMBIO_Apresentacao_Institucional_FINAL.pptx` de novo se precisar.
+- Fora do git de propósito (`.gitignore`): `*.pptx` (deck com conteúdo "Confidencial"; repo público). Em casa, peça o deck `NEXO_CAMBIO_Apresentacao_Institucional_FINAL.pptx` de novo se precisar.
 
 ## Pendências
 - Confirmar com a Nexo: uso das logos de terceiros e se os R$ 449 MM (deck confidencial) podem ser públicos.
