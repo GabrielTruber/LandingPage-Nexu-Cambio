@@ -287,6 +287,12 @@
   .partner-slot:has(img){border-style:solid;border-color:transparent;padding:12px;}
   .partner-slot:has(img) svg,.partner-slot:has(img) i{display:none;}
   .partner-slot img{max-height:100%;max-width:100%;object-fit:contain;}
+  .partner-slot.bg-oz:has(img){background:#14181a;}
+  .partner-slot.bg-topazio:has(img){background:#414549;}
+  .partner-slot.bg-sttart:has(img){background:#000;}
+  .partner-slot:has(img){padding:16px 20px;}
+  .partner-slot img{max-height:44px;}
+  .partner-slot.lg img{max-height:64px;}
   .partner-name{font-weight:700;color:var(--navy);text-align:center;font-size:.9375rem;}
 
   /* ---------- 9. Por que operar ---------- */
@@ -614,14 +620,14 @@
       (o ícone cinza some sozinho quando há uma imagem)
     -->
     <div class="partner-grid">
-      <div class="partner" data-aos="zoom-in" data-aos-delay="0"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Travelex</span></div>
-      <div class="partner" data-aos="zoom-in" data-aos-delay="80"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Moneycorp</span></div>
-      <div class="partner" data-aos="zoom-in" data-aos-delay="160"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Oz Corretora</span></div>
-      <div class="partner" data-aos="zoom-in" data-aos-delay="240"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Freex Corretora</span></div>
-      <div class="partner" data-aos="zoom-in" data-aos-delay="0"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Topázio</span></div>
-      <div class="partner" data-aos="zoom-in" data-aos-delay="80"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Sttart</span></div>
-      <div class="partner" data-aos="zoom-in" data-aos-delay="160"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Mercado Bitcoin</span></div>
-      <div class="partner" data-aos="zoom-in" data-aos-delay="240"><div class="partner-slot"><i data-lucide="landmark"></i></div><span class="partner-name">Bloquo</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="0"><div class="partner-slot lg"><i data-lucide="landmark"></i><img src="assets/bancos/travelex.png" alt="Travelex" loading="lazy"></div><span class="partner-name">Travelex</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="80"><div class="partner-slot"><i data-lucide="landmark"></i><img src="assets/bancos/moneycorp.png" alt="Moneycorp" loading="lazy"></div><span class="partner-name">Moneycorp</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="160"><div class="partner-slot bg-oz"><i data-lucide="landmark"></i><img src="assets/bancos/oz-corretora.png" alt="Oz Corretora" loading="lazy"></div><span class="partner-name">Oz Corretora</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="240"><div class="partner-slot"><i data-lucide="landmark"></i><img src="assets/bancos/freex-corretora.svg" alt="Freex Corretora" loading="lazy"></div><span class="partner-name">Freex Corretora</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="0"><div class="partner-slot bg-topazio"><i data-lucide="landmark"></i><img src="assets/bancos/topazio.png" alt="Topázio" loading="lazy"></div><span class="partner-name">Topázio</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="80"><div class="partner-slot bg-sttart"><i data-lucide="landmark"></i><img src="assets/bancos/sttart.png" alt="Sttart" loading="lazy"></div><span class="partner-name">Sttart</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="160"><div class="partner-slot"><i data-lucide="landmark"></i><img src="assets/bancos/mercado-bitcoin.svg" alt="Mercado Bitcoin" loading="lazy"></div><span class="partner-name">Mercado Bitcoin</span></div>
+      <div class="partner" data-aos="zoom-in" data-aos-delay="240"><div class="partner-slot lg"><i data-lucide="landmark"></i><img src="assets/bancos/bloquo.png" alt="Bloquo" loading="lazy"></div><span class="partner-name">Bloquo</span></div>
     </div>
   </div>
 </section>
