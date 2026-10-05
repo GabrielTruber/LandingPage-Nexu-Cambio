@@ -403,7 +403,6 @@
 <header class="site-header" id="site-header">
   <div class="rates" id="rates" role="status" aria-live="off">
     <div class="container">
-      <div class="rates-live"><span class="live-dot"></span><span class="txt">Ao vivo</span></div>
       <div class="rate">
         <span class="sym">$</span><span class="name">Dólar</span>
         <span class="val" data-val="USD">…</span><span class="chg" data-chg="USD"></span>
@@ -413,8 +412,6 @@
         <span class="sym">€</span><span class="name">Euro</span>
         <span class="val" data-val="EUR">…</span><span class="chg" data-chg="EUR"></span>
       </div>
-      <span class="rates-sep"></span>
-      <span class="rates-meta">Atualizado às <span id="rates-time">—</span></span>
     </div>
   </div>
 
@@ -818,7 +815,7 @@
     fromAwesome().catch(fromFrankfurter).then(function (d) {
       paint('USD', d.USD);
       paint('EUR', d.EUR);
-      timeEl.textContent = d.at.toLocaleTimeString('pt-BR');
+      if(timeEl) timeEl.textContent = d.at.toLocaleTimeString('pt-BR');
       ratesBar.classList.remove('is-stale');
     }).catch(function () {
       ratesBar.classList.add('is-stale');
