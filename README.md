@@ -16,11 +16,7 @@ Landing page one-page da Nexo Câmbio, baseada no visual e nas animações do si
 
 ## Bancos parceiros
 
-A seção **Parceiros** tem 8 espaços reservados: Travelex, Moneycorp, Oz Corretora, Freex Corretora, Topázio, Sttart, Mercado Bitcoin e Bloquo. Para colocar um logo, salve o arquivo em `assets/bancos/` e adicione um `<img>` dentro do `.partner-slot` correspondente (o ícone cinza some sozinho):
-
-```html
-<div class="partner-slot"><i data-lucide="landmark"></i><img src="assets/bancos/travelex.png" alt="Travelex"></div>
-```
+A seção **Parceiros** mostra as 8 logos em `assets/bancos/` (Travelex, Moneycorp, Oz Corretora, Freex Corretora, Topázio, Sttart, Mercado Bitcoin e Bloquo), cada uma com o nome embaixo. Oz, Topázio e Sttart têm fundo escuro atrás da logo (classes `bg-oz`, `bg-topazio`, `bg-sttart`); Travelex e Bloquo usam a classe `lg` (logo maior). Para trocar uma logo, substitua o arquivo em `assets/bancos/` mantendo o nome.
 
 ## Tecnologia
 
