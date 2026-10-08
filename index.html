@@ -124,9 +124,15 @@
   .btn-gold:hover{background:#fff;color:var(--navy);box-shadow:0 20px 25px -5px rgba(0,0,0,.25);}
   .btn-ghost{border:1px solid rgba(255,255,255,.3);color:#fff;}
   .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff;}
-  .hero-art{display:none;justify-content:center;align-items:center;position:relative;}
-  .hero-art img{width:100%;border-radius:4px;}
-  .hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--navy),transparent);}
+  /* Globo: o fundo preto da arte some (blend "screen") e a borda esquerda se dissolve no azul da página */
+  .hero-globe{
+    position:absolute;top:0;bottom:0;left:48%;height:100%;width:auto;max-width:none;
+    mix-blend-mode:screen;opacity:.45;pointer-events:none;
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 22%);
+    mask-image:linear-gradient(to right,transparent 0,#000 22%);
+    animation:globe-in 1.8s ease-out both;
+  }
+  @keyframes globe-in{from{opacity:0;}to{opacity:.45;}}
 
   /* ---------- 2. Sobre ---------- */
   .about{background:#fff;}
@@ -373,7 +379,8 @@
     .hero h1{font-size:4.5rem;}
     .hero-grid,.split,.cards2{grid-template-columns:1fr 1fr;}
     .hero-cta{flex-direction:row;}
-    .hero-art{display:flex;}
+    .hero-globe{left:52%;opacity:1;}
+    @keyframes globe-in{from{opacity:0;}to{opacity:1;}}
     .steps{grid-template-columns:repeat(4,1fr);}
     .steps-line{display:block;}
     .cards4{grid-template-columns:1fr 1fr;}
@@ -433,6 +440,7 @@
 <!-- ============ 1. HERO ============ -->
 <section id="inicio" class="hero">
   <div class="hero-bg"></div>
+  <img class="hero-globe" src="assets/hero-globo.jpg" alt="" aria-hidden="true">
   <div class="hero-shade"></div>
   <div class="container hero-grid">
     <div data-aos="fade-up">
@@ -442,9 +450,6 @@
         <a href="#contato" class="btn btn-gold">Vamos conversar <i data-lucide="arrow-right"></i></a>
         <a href="#solucoes" class="btn btn-ghost">Conheça nossas soluções</a>
       </div>
-    </div>
-    <div class="hero-art" data-aos="zoom-in" data-aos-duration="1500">
-      <img src="assets/img4.jpg" alt="Globo com símbolos de moedas internacionais">
     </div>
   </div>
 </section>
@@ -608,7 +613,7 @@
   <div class="container">
     <div class="head" data-aos="fade-up">
       <h2 class="eyebrow c"><i data-lucide="landmark"></i> Hub Multibancos</h2>
-      <h2 class="h2">Bancos e Instituições Financeiras Parceiras e Não Parceiras</h2>
+      <h2 class="h2">Bancos e Instituições Financeiras</h2>
       <p>Acesso a múltiplas instituições financeiras para buscar as melhores condições em cada operação.</p>
     </div>
     <!--
