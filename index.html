@@ -364,9 +364,11 @@
 
   /* ---------- Breakpoints (md 768 / lg 1024) ---------- */
   @media (max-width:767px){
-    :root{--rates-h:44px;}
-    .rates .container{gap:14px;padding-inline:12px;}
-    .rates-live .txt,.rates-meta,.rates-sep,.rate .name,.rate .chg{display:none;}
+    :root{--rates-h:auto;}
+    .rates{padding-block:6px;}
+    .rates .container{flex-wrap:wrap;gap:4px 12px;padding-inline:12px;}
+    .rate{flex:0 0 calc(50% - 6px);justify-content:center;align-items:center;}
+    .rates-live .txt,.rates-meta,.rates-sep,.rate:not(.crypto) .name,.rate .chg{display:none;}
     .rate .val{font-size:.875rem;}
     .logo img{height:64px;}
     .nav{padding-block:16px;}
@@ -418,6 +420,16 @@
       <div class="rate">
         <span class="sym">€</span><span class="name">Euro</span>
         <span class="val" data-val="EUR">…</span><span class="chg" data-chg="EUR"></span>
+      </div>
+      <span class="rates-sep"></span>
+      <div class="rate crypto">
+        <span class="sym">₮</span><span class="name">USDT</span>
+        <span class="val" data-val="USDT">…</span><span class="chg" data-chg="USDT"></span>
+      </div>
+      <span class="rates-sep"></span>
+      <div class="rate crypto">
+        <span class="sym">€</span><span class="name">EURC</span>
+        <span class="val" data-val="EURC">…</span><span class="chg" data-chg="EURC"></span>
       </div>
     </div>
   </div>
@@ -812,7 +824,24 @@
     });
   }
 
+  /* USDT e EURC em reais: Mercado Bitcoin (API pública, atualiza a cada 30 s) */
+  function updateCrypto() {
+    getJSON('https://api.mercadobitcoin.net/api/v4/tickers?symbols=USDT-BRL,EURC-BRL').then(function (list) {
+      list.forEach(function (t) {
+        var code = t.pair.split('-')[0], price = +t.last, open = +t.open;
+        if (!isFinite(price)) return;
+        paint(code, { bid: price, pct: open ? (price - open) / open * 100 : NaN });
+      });
+    }).catch(function () {
+      ['USDT', 'EURC'].forEach(function (c) {
+        var el = document.querySelector('[data-val="' + c + '"]');
+        if (el.textContent === '…') el.textContent = 'indisponível';
+      });
+    });
+  }
+
   function update() {
+    updateCrypto();
     fromAwesome().catch(fromFrankfurter).then(function (d) {
       paint('USD', d.USD);
       paint('EUR', d.EUR);
@@ -820,7 +849,7 @@
       ratesBar.classList.remove('is-stale');
     }).catch(function () {
       ratesBar.classList.add('is-stale');
-      document.querySelectorAll('[data-val]').forEach(function (el) {
+      document.querySelectorAll('[data-val="USD"],[data-val="EUR"]').forEach(function (el) {
         if (el.textContent === '…') el.textContent = 'indisponível';
       });
     });
