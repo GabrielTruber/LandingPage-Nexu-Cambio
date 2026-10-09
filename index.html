@@ -95,6 +95,20 @@
   .nav-links{display:none;gap:32px;font-weight:500;color:var(--navy);}
   .nav-links a{transition:color .3s;}
   .nav-links a:hover{color:var(--gold);}
+  .nav{position:relative;}
+  .nav-toggle{display:none;flex:none;width:44px;height:44px;border:0;border-radius:10px;background:transparent;cursor:pointer;padding:0;align-items:center;justify-content:center;flex-direction:column;gap:5px;}
+  .nav-toggle span{display:block;width:22px;height:2px;border-radius:2px;background:var(--navy);transition:transform .3s,opacity .3s;}
+  .nav.open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav.open .nav-toggle span:nth-child(2){opacity:0;}
+  .nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  @media (max-width:767px){
+    .nav-toggle{display:flex;order:3;}
+    .nav .btn-pill{margin-left:auto;}
+    .nav-links{position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:#fff;box-shadow:0 12px 20px -8px rgba(0,0,0,.2);border-top:1px solid #EEF0F6;}
+    .nav.open .nav-links{display:flex;}
+    .nav-links a{padding:16px 24px;border-bottom:1px solid #F3F4F6;font-size:1rem;}
+    .nav-links a:last-child{border-bottom:0;}
+  }
   .btn-pill{
     background:var(--gold);color:#fff;padding:8px 24px;border-radius:999px;font-weight:600;
     box-shadow:0 4px 6px -1px rgba(0,0,0,.1);transition:all .3s;white-space:nowrap;
@@ -434,7 +448,7 @@
   <nav class="nav" id="navbar">
     <div class="container">
       <a href="#inicio" class="logo"><img src="assets/logo.png" alt="Nexo Câmbio"></a>
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         <a href="#inicio">Início</a>
         <a href="#sobre">Quem Somos</a>
         <a href="#solucoes">Soluções</a>
@@ -442,6 +456,7 @@
         <a href="#parceiros">Parceiros</a>
       </div>
       <a href="#contato" class="btn-pill">Vamos conversar?</a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
     </div>
   </nav>
 </header>
@@ -568,7 +583,7 @@
     <div data-aos="fade-right">
       <h2 class="h2">Envie e receba dinheiro.</h2>
       <h3 class="sub">Remessas para:</h3>
-      <p class="txt">Remessas disponíveis nas principais moedas do mundo: Dólar, Euro, Libra, Yuan e outras moedas.</p>
+      <p class="txt">Principais moedas do mundo: Dólar, Euro, Libra, Yuan, USDT ou USDC e outras moedas.</p>
       <ul class="bullets">
         <li><span>Enviar dinheiro para sua conta no exterior via Stablecoins</span></li>
         <li><span>Receber ou fazer pagamentos para o exterior</span></li>
@@ -576,7 +591,6 @@
         <li><span>Compra, venda ou locação de imóveis</span></li>
         <li><span>Compra e locação de imóveis para brasileiros no exterior</span></li>
         <li><span>Investimentos no exterior</span></li>
-        <li><span>Envios em Stable Coin</span></li>
       </ul>
     </div>
     <div data-aos="fade-left" class="photo photo-send">
@@ -708,6 +722,17 @@
   syncHeaderHeight();
   window.addEventListener('resize', syncHeaderHeight);
   if ('ResizeObserver' in window) new ResizeObserver(syncHeaderHeight).observe(header);
+
+  /* Menu do celular (hambúrguer) */
+  var navToggle = document.getElementById('nav-toggle');
+  function setMenu(open) {
+    nav.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  }
+  navToggle.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+  document.querySelectorAll('#nav-links a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  window.addEventListener('resize', function () { if (window.innerWidth >= 768) setMenu(false); });
 
   /* Navbar encolhe ao rolar */
   function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 50); }
