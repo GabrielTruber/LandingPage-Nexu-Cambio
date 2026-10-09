@@ -379,9 +379,10 @@
   @media (max-width:767px){
     :root{--rates-h:auto;}
     .rates{padding-block:6px;}
-    .rates .container{flex-wrap:wrap;gap:4px 12px;padding-inline:12px;}
-    .rate{flex:0 0 calc(50% - 6px);justify-content:center;align-items:center;}
-    .rates-live .txt,.rates-meta,.rates-sep,.rate:not(.crypto) .name,.rate .chg{display:none;}
+    .rates .container{display:grid;grid-template-columns:repeat(2,max-content);justify-content:center;gap:6px 28px;padding-inline:12px;}
+    .rate{display:grid;grid-template-columns:20px 3rem auto;align-items:center;gap:8px;}
+    .rates-live .txt,.rates-meta,.rates-sep,.rate .chg{display:none;}
+    .rate .name{font-size:.8125rem;}
     .rate .val{font-size:.875rem;}
     .logo img{height:64px;}
     .nav{padding-block:16px;}
@@ -391,6 +392,12 @@
     html,body{overflow-x:clip;max-width:100%;}
     .cta a{padding:20px 40px;font-size:1.375rem;white-space:nowrap;}
     footer{padding-bottom:104px;}
+  }
+  @media (max-width:359px){
+    .rates .container{column-gap:14px;padding-inline:8px;}
+    .rate{grid-template-columns:18px 2.6rem auto;gap:5px;}
+    .rate .sym{width:18px;height:18px;font-size:.6875rem;}
+    .rate .val{font-size:.8125rem;}
   }
   @media (min-width:768px){
     .nav-links{display:flex;}
