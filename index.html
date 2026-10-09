@@ -218,10 +218,7 @@
   .chip:hover{border-color:var(--gold);}
   .chip svg,.chip i{color:var(--gold);}
   .chip span{font-size:.875rem;font-weight:500;}
-  .photo-comex{height:500px;}
-  .photo-comex .bg{background-image:url('assets/img2.jpg');opacity:.8;transition:transform 1s;}
-  .photo-comex:hover .bg{transform:scale(1.1);}
-  .photo-comex .shade{position:absolute;inset:0;background:linear-gradient(to top,var(--navy),transparent 50%);}
+  .comex .split{grid-template-columns:minmax(0,1fr);max-width:56rem;}
 
   /* ---------- 6. Especialistas ---------- */
   .experts{background:#fff;}
@@ -548,10 +545,6 @@
         <div class="chip"><i data-lucide="circle-check"></i><span>Pagamento via prazo</span></div>
         <div class="chip"><i data-lucide="circle-check"></i><span>Câmbio Futuro</span></div>
       </div>
-    </div>
-    <div data-aos="fade-left" class="photo photo-comex">
-      <div class="bg"></div>
-      <div class="shade"></div>
     </div>
   </div>
 </section>
