@@ -399,6 +399,17 @@
     .rate .sym{width:18px;height:18px;font-size:.6875rem;}
     .rate .val{font-size:.8125rem;}
   }
+  @media (max-width:767px){
+    .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px;}
+    .stat{padding:8px 0;}
+    .stat .big{flex-direction:column;gap:10px;}
+    .stat .big p{font-size:1.875rem;white-space:nowrap;}
+  }
+  @media (max-width:479px){
+    .stats{grid-template-columns:minmax(0,1fr);gap:20px;}
+    .stat .big{flex-direction:row;gap:12px;}
+    .stat .big p{font-size:2.25rem;}
+  }
   @media (min-width:768px){
     .nav-links{display:flex;}
     .logo img{height:96px;}
@@ -417,6 +428,7 @@
     .partner-grid{grid-template-columns:repeat(4,1fr);}
     .why-grid{grid-template-columns:repeat(4,1fr);}
     .foot-grid{grid-template-columns:1fr 1fr 1fr;gap:48px;}
+    .foot-brand img{height:56px;}
     .foot-bottom{flex-direction:row;}
   }
   @media (min-width:768px) and (max-width:1023px){
