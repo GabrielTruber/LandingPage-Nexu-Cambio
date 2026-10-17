@@ -429,10 +429,10 @@
     .stat+.stat{border-left:1px solid rgba(255,255,255,.2);}
     .partner-grid{grid-template-columns:repeat(4,1fr);}
     .why-grid{grid-template-columns:repeat(4,1fr);}
-    .foot-grid{grid-template-columns:1fr 1fr 1fr;gap:48px 72px;}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:48px 72px;}
+    .foot-brand{grid-column:1 / -1;}
     .foot-brand img{height:56px;margin-bottom:24px;}
-    /* títulos centralizados com a linha do logo: o conteúdo das 3 colunas começa na mesma altura */
-    footer h4{display:flex;align-items:center;height:56px;margin-bottom:24px;}
+    .foot-brand .foot-note{max-width:44rem;}
     .foot-bottom{flex-direction:row;}
   }
   @media (min-width:768px) and (max-width:1023px){
@@ -440,6 +440,11 @@
   }
   @media (min-width:1024px){
     .cards4{grid-template-columns:repeat(4,1fr);}
+    /* rodapé: coluna da frase mais larga (menos linhas) e as 3 colunas começam na mesma linha */
+    .foot-grid{grid-template-columns:1.5fr 1fr 1fr;gap:48px 56px;}
+    .foot-brand{grid-column:auto;}
+    .foot-brand .foot-note{max-width:34rem;}
+    footer h4{display:flex;align-items:center;height:56px;margin-bottom:24px;}
   }
   @media (prefers-reduced-motion:reduce){
     .live-dot::after{animation:none;}
